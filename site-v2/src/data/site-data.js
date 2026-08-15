@@ -351,6 +351,12 @@ export const articles = [
   },
 ];
 
+// ---------- Envoi du formulaire de contact (Web3Forms) ----------
+// Clé publique (sûre côté client) — générée sur https://web3forms.com avec l'email de réception
+export const web3forms = {
+  accessKey: '016612b1-7291-467f-85dd-264ecdc49223',
+};
+
 // ---------- Témoignage du Directeur ----------
 export const directorMessage = {
   title: 'MOT DU DIRECTEUR',

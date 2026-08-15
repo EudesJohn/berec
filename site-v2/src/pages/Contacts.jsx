@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
 
-import { offices, company } from '../data/site-data';
+import { offices, company, web3forms } from '../data/site-data';
 import { PageBanner, Reveal, Button } from '../components/Shared';
 import { CountryBadge, ContactIcon, IconPin, IconAlert, IconPhone, IconMail, IconClock, IconUser } from '../components/Icons';
 
@@ -19,18 +19,49 @@ const tel = (p) => `tel:${p.replace(/[^\d+]/g, '')}`;
 export default function Contacts() {
   const [form, setForm] = useState({ name: '', email: '', phone: '', company: '', subject: '', message: '' });
   const [sent, setSent] = useState(false);
+  const [sending, setSending] = useState(false);
   const [error, setError] = useState(false);
+  const [sendError, setSendError] = useState(false);
 
   const update = (k) => (e) => setForm({ ...form, [k]: e.target.value });
 
-  function handleSubmit(e) {
+  async function handleSubmit(e) {
     e.preventDefault();
     if (!form.name.trim() || !form.email.trim()) {
       setError(true);
       return;
     }
     setError(false);
-    setSent(true);
+    setSendError(false);
+    setSending(true);
+    try {
+      const res = await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+        body: JSON.stringify({
+          access_key: web3forms.accessKey,
+          name: form.name,
+          email: form.email,
+          phone: form.phone,
+          company: form.company,
+          subject: form.subject || 'Message depuis le site — ' + form.name,
+          message: form.message,
+          botcheck: '', // honeypot anti-spam
+          from_name: form.name,
+          _replyto: form.email,
+        }),
+      });
+      const data = await res.json();
+      if (data.success) {
+        setSent(true);
+      } else {
+        setSendError(true);
+      }
+    } catch {
+      setSendError(true);
+    } finally {
+      setSending(false);
+    }
   }
 
   const main = offices.find((o) => o.type.includes('Direction')) || offices[0];
@@ -256,7 +287,7 @@ export default function Contacts() {
                     </motion.div>
                     <h3 className="mt-6 font-heading text-2xl font-bold text-navy-900">Message envoyé !</h3>
                     <p className="mt-3 text-navy-800/65 max-w-sm mx-auto">Merci {form.name.split(' ')[0]} ! Notre équipe commerciale vous répondra très rapidement à l'adresse {form.email}.</p>
-                    <button onClick={() => { setSent(false); setForm({ name: '', email: '', phone: '', company: '', subject: '', message: '' }); }} className="mt-6 text-[13.5px] font-semibold text-berec-600 hover:underline">
+                    <button onClick={() => { setSent(false); setSendError(false); setForm({ name: '', email: '', phone: '', company: '', subject: '', message: '' }); }} className="mt-6 text-[13.5px] font-semibold text-berec-600 hover:underline">
                       Envoyer un autre message
                     </button>
                   </motion.div>
@@ -266,6 +297,12 @@ export default function Contacts() {
                       <div role="alert" className="rounded-xl bg-red-50 ring-1 ring-red-200 px-4 py-3 text-[13.5px] text-red-700 flex items-center gap-2.5">
                         <IconAlert className="w-5 h-5 shrink-0 text-red-500" />
                         <span>Merci de renseigner au minimum votre nom et votre adresse email.</span>
+                      </div>
+                    )}
+                    {sendError && (
+                      <div role="alert" className="rounded-xl bg-red-50 ring-1 ring-red-200 px-4 py-3 text-[13.5px] text-red-700 flex items-center gap-2.5">
+                        <IconAlert className="w-5 h-5 shrink-0 text-red-500" />
+                        <span>L'envoi a échoué. Merci de réessayer, ou écrivez-nous directement à {company.email}.</span>
                       </div>
                     )}
                     <div className="grid sm:grid-cols-2 gap-5">
@@ -292,10 +329,20 @@ export default function Contacts() {
                     </Field>
                     <button
                       type="submit"
-                      className="w-full inline-flex items-center justify-center gap-2 rounded-full bg-gradient-to-r from-berec-500 to-berec-700 text-white font-heading font-bold text-[15px] py-4 shadow-card hover:shadow-glow hover:-translate-y-0.5 transition duration-300 active:scale-[0.98]"
+                      disabled={sending}
+                      className="w-full inline-flex items-center justify-center gap-2 rounded-full bg-gradient-to-r from-berec-500 to-berec-700 text-white font-heading font-bold text-[15px] py-4 shadow-card hover:shadow-glow hover:-translate-y-0.5 transition duration-300 active:scale-[0.98] disabled:opacity-70 disabled:cursor-not-allowed disabled:hover:translate-y-0"
                     >
-                      Envoyer le message
-                      <svg className="w-4.5 h-4.5" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z" /></svg>
+                      {sending ? (
+                        <>
+                          <svg className="w-4.5 h-4.5 animate-spin" fill="none" viewBox="0 0 24 24"><circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" /><path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z" /></svg>
+                          Envoi en cours…
+                        </>
+                      ) : (
+                        <>
+                          Envoyer le message
+                          <svg className="w-4.5 h-4.5" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z" /></svg>
+                        </>
+                      )}
                     </button>
                   </form>
                 )}
