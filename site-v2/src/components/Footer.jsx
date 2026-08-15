@@ -73,7 +73,7 @@ export default function Footer() {
               </li>
               <li className="flex gap-3 items-start">
                 <IconPhone className="mt-1.5 w-4 h-4 text-berec-300 shrink-0" />
-                <a href={`tel:${company.phone.replace(/\s/g, '')}`} className="hover:text-berec-200 transition-colors">{company.phone}</a>
+                <a href={`tel:${company.phonePrimary.replace(/\s/g, '')}`} className="hover:text-berec-200 transition-colors">{company.phone}</a>
               </li>
               <li className="flex gap-3 items-start">
                 <IconMail className="mt-1.5 w-4 h-4 text-berec-300 shrink-0" />

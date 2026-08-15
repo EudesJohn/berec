@@ -16,6 +16,7 @@ export const company = {
   email: 'contact@berecsarl.com',
   email2: 'berecmedical@yahoo.fr',
   phone: '(+229) 01 66 63 35 35 / 01 21 33 09 15',
+  phonePrimary: '+229 01 66 63 35 35',
   address: 'C/343, quartier Ayélawadjè – Akpakpa',
   city: 'Cotonou – Bénin',
   hours: 'Lun – Vend : 8h00 – 18h00 · Sam : sur RDV',

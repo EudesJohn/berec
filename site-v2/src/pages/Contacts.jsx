@@ -45,7 +45,7 @@ export default function Contacts() {
         <div className="mx-auto max-w-7xl px-5">
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
             {[
-              { icon: <IconPhone className="w-5 h-5" />, label: 'Téléphone', value: company.phone, href: tel(company.phone) },
+              { icon: <IconPhone className="w-5 h-5" />, label: 'Téléphone', value: company.phone, href: tel(company.phonePrimary) },
               { icon: <IconMail className="w-5 h-5" />, label: 'Email', value: company.email, href: `mailto:${company.email}` },
               { icon: <IconPin className="w-5 h-5" />, label: 'Adresse', value: `${company.address}, ${company.city}` },
               { icon: <IconClock className="w-5 h-5" />, label: 'Horaires', value: company.hours },
@@ -347,7 +347,7 @@ export default function Contacts() {
                   <h3 className="font-heading font-bold text-xl">Besoin d'aide ?</h3>
                   <p className="mt-2 text-white/65 text-[14.5px]">Notre équipe est joignable du lundi au vendredi, de 8h à 18h.</p>
                   <div className="mt-6 grid sm:grid-cols-2 gap-4">
-                    <a href={tel(company.phone)} className="group rounded-xl bg-white/5 ring-1 ring-white/10 px-5 py-4 hover:bg-white/10 transition-colors">
+                    <a href={tel(company.phonePrimary)} className="group rounded-xl bg-white/5 ring-1 ring-white/10 px-5 py-4 hover:bg-white/10 transition-colors">
                       <p className="text-[12px] uppercase tracking-widest text-berec-300 mb-1.5">Téléphone</p>
                       <p className="font-heading font-semibold group-hover:text-berec-200 transition-colors">{company.phone}</p>
                     </a>
