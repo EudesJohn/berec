@@ -16,8 +16,8 @@ export default function Footer() {
           {/* Brand */}
           <motion.div initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: '-60px' }}>
             <div className="flex items-center gap-3 mb-4">
-              <span className="grid place-items-center w-11 h-11 rounded-xl bg-white/10 ring-1 ring-white/20">
-                <img src="/images/logo/menu-logo.webp" alt="BEREC" width="32" height="32" loading="lazy" decoding="async" className="w-8 h-8 object-contain" />
+              <span className="grid place-items-center rounded-xl overflow-hidden px-2 py-1.5 bg-white shadow-lg shadow-navy-950/30 ring-1 ring-white/70">
+                <img src="/images/logo/menu-logo.webp" alt="BEREC" width="85" height="69" loading="lazy" decoding="async" className="h-8 w-auto object-contain" />
               </span>
               <span className="font-heading font-extrabold text-white text-lg tracking-wide">
                 BEREC <span className="text-berec-300">SARL</span>
