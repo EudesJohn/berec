@@ -150,7 +150,7 @@ export default function Contacts() {
 
                     <div className="mt-7 flex flex-wrap items-center gap-3">
                       <a
-                        href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(`${main.city} ${main.address} Bénin`)}`}
+                        href={company.mapUrl}
                         target="_blank"
                         rel="noreferrer"
                         className="inline-flex items-center gap-2 rounded-full bg-white px-6 py-3 text-[13.5px] font-semibold text-berec-700 shadow-lg hover:-translate-y-0.5 hover:shadow-xl transition duration-300 active:scale-[0.97]"
@@ -318,7 +318,7 @@ export default function Contacts() {
                     </div>
                   </div>
                   <a
-                    href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent('Cotonou Akpakpa Bénin')}`}
+                    href={company.mapUrl}
                     target="_blank"
                     rel="noreferrer"
                     className="hidden sm:inline-flex items-center gap-1.5 rounded-full bg-white/10 ring-1 ring-white/25 px-4 py-2 text-[12.5px] font-semibold text-white hover:bg-white/20 transition-colors"
@@ -330,7 +330,7 @@ export default function Contacts() {
                 <div className="relative h-[22rem]">
                   <iframe
                     title="Carte — Siège BEREC SARL, Cotonou (Bénin)"
-                    src="https://www.google.com/maps?q=Cotonou%20Akpakpa%20B%C3%A9nin&output=embed"
+                    src={`https://www.google.com/maps?q=${company.mapCoords.lat},${company.mapCoords.lng}&z=17&output=embed`}
                     className="absolute inset-0 w-full h-full border-0"
                     loading="lazy"
                     referrerPolicy="no-referrer-when-downgrade"
