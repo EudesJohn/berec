@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
 
-import { offices, company, web3forms } from '../data/site-data';
+import { offices, company, contactForm } from '../data/site-data';
 import { PageBanner, Reveal, Button } from '../components/Shared';
 import { CountryBadge, ContactIcon, IconPin, IconAlert, IconPhone, IconMail, IconClock, IconUser } from '../components/Icons';
 
@@ -35,24 +35,25 @@ export default function Contacts() {
     setSendError(false);
     setSending(true);
     try {
-      const res = await fetch('https://api.web3forms.com/submit', {
+      const fd = new FormData();
+      fd.append('name', form.name);
+      fd.append('email', form.email);
+      fd.append('phone', form.phone);
+      fd.append('company', form.company);
+      fd.append('message', form.message || '—');
+      fd.append('_subject', form.subject || 'Message depuis le site — ' + form.name);
+      fd.append('_replyto', form.email);
+      fd.append('_template', 'table');
+      fd.append('_captcha', 'false'); // reCAPTCHA désactivé (AJAX)
+      fd.append('_honey', ''); // honeypot anti-spam
+
+      const res = await fetch(contactForm.endpoint, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
-        body: JSON.stringify({
-          access_key: web3forms.accessKey,
-          name: form.name,
-          email: form.email,
-          phone: form.phone,
-          company: form.company,
-          subject: form.subject || 'Message depuis le site — ' + form.name,
-          message: form.message,
-          botcheck: '', // honeypot anti-spam
-          from_name: form.name,
-          _replyto: form.email,
-        }),
+        body: fd,
+        headers: { Accept: 'application/json' },
       });
       const data = await res.json();
-      if (data.success) {
+      if (res.ok && data.success) {
         setSent(true);
       } else {
         setSendError(true);

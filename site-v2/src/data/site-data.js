@@ -351,10 +351,11 @@ export const articles = [
   },
 ];
 
-// ---------- Envoi du formulaire de contact (Web3Forms) ----------
-// Clé publique (sûre côté client) — générée sur https://web3forms.com avec l'email de réception
-export const web3forms = {
-  accessKey: '016612b1-7291-467f-85dd-264ecdc49223',
+// ---------- Envoi du formulaire de contact (FormSubmit) ----------
+// Service gratuit et illimité — l'email de réception est dans l'URL de l'endpoint.
+// Première soumission : cliquer le lien de confirmation reçu par email.
+export const contactForm = {
+  endpoint: 'https://formsubmit.co/ajax/contact@berecsarl.com',
 };
 
 // ---------- Témoignage du Directeur ----------
