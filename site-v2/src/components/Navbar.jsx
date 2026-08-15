@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { Link, NavLink } from 'react-router-dom';
 import { motion, AnimatePresence, useScroll, useMotionValueEvent } from 'framer-motion';
 
-import { navigation, company } from '../data/site-data';
+import { navigation } from '../data/site-data';
 import { EASE_OUT } from '../lib/motion';
 
 export default function Navbar() {
@@ -21,36 +21,6 @@ export default function Navbar() {
     <motion.header className="fixed top-0 inset-x-0 z-50">
       {/* Signature accent line */}
       <div className="h-[3px] bg-gradient-to-r from-berec-400 via-berec-500 to-gold-400" aria-hidden="true" />
-
-      {/* Top bar */}
-      <AnimatePresence>
-        {top && (
-          <motion.div
-            initial={{ height: 0, opacity: 0 }}
-            animate={{ height: 'auto', opacity: 1 }}
-            exit={{ height: 0, opacity: 0 }}
-            className="overflow-hidden bg-gradient-to-r from-navy-950 via-berec-900/90 to-navy-950 text-white/85 text-[13px] border-b border-white/10"
-          >
-            <div className="mx-auto max-w-7xl px-5 py-2 flex items-center justify-between gap-4">
-              <p className="truncate flex items-center gap-2.5">
-                <span className="w-1.5 h-1.5 rounded-full bg-gold-400 animate-pulse shrink-0" />
-                <span className="text-berec-200 font-semibold">{company.legalName}</span>
-                {' '}— {company.mission.split('.')[0]}.
-              </p>
-              <div className="hidden md:flex items-center gap-5 shrink-0">
-                <a href={`tel:${company.phone.replace(/\s/g, '')}`} className="flex items-center gap-1.5 hover:text-berec-300 transition-colors">
-                  <svg className="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 24 24"><path d="M6.62 10.79a15.05 15.05 0 006.59 6.59l2.2-2.2a1 1 0 011.01-.24 11.36 11.36 0 003.56.57 1 1 0 011 1V20a1 1 0 01-1 1A17 17 0 013 4a1 1 0 011-1h3.5a1 1 0 011 1 11.36 11.36 0 00.57 3.56 1 1 0 01-.25 1.01l-2.2 2.22z"/></svg>
-                  {company.phone}
-                </a>
-                <a href={`mailto:${company.email}`} className="flex items-center gap-1.5 pl-5 border-l border-white/15 hover:text-berec-300 transition-colors">
-                  <svg className="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 24 24"><path d="M20 4H4a2 2 0 00-2 2v12a2 2 0 002 2h16a2 2 0 002-2V6a2 2 0 00-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
-                  {company.email}
-                </a>
-              </div>
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
 
       {/* Main navbar */}
       <motion.nav
