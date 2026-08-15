@@ -1,0 +1,1354 @@
+<!doctype html>
+<html lang="fr-FR">
+<head><script>if(navigator.userAgent.match(/MSIE|Internet Explorer/i)||navigator.userAgent.match(/Trident\/7\..*?rv:11/i)){var href=document.location.href;if(!href.match(/[?&]nowprocket/)){if(href.indexOf("?")==-1){if(href.indexOf("#")==-1){document.location.href=href+"?nowprocket=1"}else{document.location.href=href.replace("#","?nowprocket=1#")}}else{if(href.indexOf("#")==-1){document.location.href=href+"&nowprocket=1"}else{document.location.href=href.replace("#","&nowprocket=1#")}}}}</script><script>class RocketLazyLoadScripts{constructor(e){this.triggerEvents=e,this.eventOptions={passive:!0},this.userEventListener=this.triggerListener.bind(this),this.delayedScripts={normal:[],async:[],defer:[]},this.allJQueries=[]}_addUserInteractionListener(e){this.triggerEvents.forEach((t=>window.addEventListener(t,e.userEventListener,e.eventOptions)))}_removeUserInteractionListener(e){this.triggerEvents.forEach((t=>window.removeEventListener(t,e.userEventListener,e.eventOptions)))}triggerListener(){this._removeUserInteractionListener(this),"loading"===document.readyState?document.addEventListener("DOMContentLoaded",this._loadEverythingNow.bind(this)):this._loadEverythingNow()}async _loadEverythingNow(){this._delayEventListeners(),this._delayJQueryReady(this),this._handleDocumentWrite(),this._registerAllDelayedScripts(),this._preloadAllScripts(),await this._loadScriptsFromList(this.delayedScripts.normal),await this._loadScriptsFromList(this.delayedScripts.defer),await this._loadScriptsFromList(this.delayedScripts.async),await this._triggerDOMContentLoaded(),await this._triggerWindowLoad(),window.dispatchEvent(new Event("rocket-allScriptsLoaded"))}_registerAllDelayedScripts(){document.querySelectorAll("script[type=rocketlazyloadscript]").forEach((e=>{e.hasAttribute("src")?e.hasAttribute("async")&&!1!==e.async?this.delayedScripts.async.push(e):e.hasAttribute("defer")&&!1!==e.defer||"module"===e.getAttribute("data-rocket-type")?this.delayedScripts.defer.push(e):this.delayedScripts.normal.push(e):this.delayedScripts.normal.push(e)}))}async _transformScript(e){return await this._requestAnimFrame(),new Promise((t=>{const n=document.createElement("script");let r;[...e.attributes].forEach((e=>{let t=e.nodeName;"type"!==t&&("data-rocket-type"===t&&(t="type",r=e.nodeValue),n.setAttribute(t,e.nodeValue))})),e.hasAttribute("src")?(n.addEventListener("load",t),n.addEventListener("error",t)):(n.text=e.text,t()),e.parentNode.replaceChild(n,e)}))}async _loadScriptsFromList(e){const t=e.shift();return t?(await this._transformScript(t),this._loadScriptsFromList(e)):Promise.resolve()}_preloadAllScripts(){var e=document.createDocumentFragment();[...this.delayedScripts.normal,...this.delayedScripts.defer,...this.delayedScripts.async].forEach((t=>{const n=t.getAttribute("src");if(n){const t=document.createElement("link");t.href=n,t.rel="preload",t.as="script",e.appendChild(t)}})),document.head.appendChild(e)}_delayEventListeners(){let e={};function t(t,n){!function(t){function n(n){return e[t].eventsToRewrite.indexOf(n)>=0?"rocket-"+n:n}e[t]||(e[t]={originalFunctions:{add:t.addEventListener,remove:t.removeEventListener},eventsToRewrite:[]},t.addEventListener=function(){arguments[0]=n(arguments[0]),e[t].originalFunctions.add.apply(t,arguments)},t.removeEventListener=function(){arguments[0]=n(arguments[0]),e[t].originalFunctions.remove.apply(t,arguments)})}(t),e[t].eventsToRewrite.push(n)}function n(e,t){let n=e[t];Object.defineProperty(e,t,{get:()=>n||function(){},set(r){e["rocket"+t]=n=r}})}t(document,"DOMContentLoaded"),t(window,"DOMContentLoaded"),t(window,"load"),t(window,"pageshow"),t(document,"readystatechange"),n(document,"onreadystatechange"),n(window,"onload"),n(window,"onpageshow")}_delayJQueryReady(e){let t=window.jQuery;Object.defineProperty(window,"jQuery",{get:()=>t,set(n){if(n&&n.fn&&!e.allJQueries.includes(n)){n.fn.ready=n.fn.init.prototype.ready=function(t){e.domReadyFired?t.bind(document)(n):document.addEventListener("rocket-DOMContentLoaded",(()=>t.bind(document)(n)))};const t=n.fn.on;n.fn.on=n.fn.init.prototype.on=function(){if(this[0]===window){function e(e){return e.split(" ").map((e=>"load"===e||0===e.indexOf("load.")?"rocket-jquery-load":e)).join(" ")}"string"==typeof arguments[0]||arguments[0]instanceof String?arguments[0]=e(arguments[0]):"object"==typeof arguments[0]&&Object.keys(arguments[0]).forEach((t=>{delete Object.assign(arguments[0],{[e(t)]:arguments[0][t]})[t]}))}return t.apply(this,arguments),this},e.allJQueries.push(n)}t=n}})}async _triggerDOMContentLoaded(){this.domReadyFired=!0,await this._requestAnimFrame(),document.dispatchEvent(new Event("rocket-DOMContentLoaded")),await this._requestAnimFrame(),window.dispatchEvent(new Event("rocket-DOMContentLoaded")),await this._requestAnimFrame(),document.dispatchEvent(new Event("rocket-readystatechange")),await this._requestAnimFrame(),document.rocketonreadystatechange&&document.rocketonreadystatechange()}async _triggerWindowLoad(){await this._requestAnimFrame(),window.dispatchEvent(new Event("rocket-load")),await this._requestAnimFrame(),window.rocketonload&&window.rocketonload(),await this._requestAnimFrame(),this.allJQueries.forEach((e=>e(window).trigger("rocket-jquery-load"))),window.dispatchEvent(new Event("rocket-pageshow")),await this._requestAnimFrame(),window.rocketonpageshow&&window.rocketonpageshow()}_handleDocumentWrite(){const e=new Map;document.write=document.writeln=function(t){const n=document.currentScript,r=document.createRange(),i=n.parentElement;let o=e.get(n);void 0===o&&(o=n.nextSibling,e.set(n,o));const a=document.createDocumentFragment();r.setStart(a,0),a.appendChild(r.createContextualFragment(t)),i.insertBefore(a,o)}}async _requestAnimFrame(){return new Promise((e=>requestAnimationFrame(e)))}static run(){const e=new RocketLazyLoadScripts(["keydown","mousemove","touchmove","touchstart","touchend","wheel"]);e._addUserInteractionListener(e)}}RocketLazyLoadScripts.run();
+</script>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="format-detection" content="telephone=no">
+	<link rel="profile" href="https://gmpg.org/xfn/11">
+	<title>Book an Appointment &#8211; Berec Sarl</title><link rel="preload" as="style" href="https://fonts.googleapis.com/css?family=Rubik%3A400%2C500%7CPoppins%3A700%2C800%2C500%2C600%2C400%7CCinzel%3A400&#038;display=swap" /><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Rubik%3A400%2C500%7CPoppins%3A700%2C800%2C500%2C600%2C400%7CCinzel%3A400&#038;display=swap" media="print" onload="this.media='all'" /><noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Rubik%3A400%2C500%7CPoppins%3A700%2C800%2C500%2C600%2C400%7CCinzel%3A400&#038;display=swap" /></noscript><link rel="stylesheet" href="https://www.berecsarl.com/wp-content/cache/min/1/62607ad1e8060a856c8f7854c15513fe.css" media="all" data-minify="1" />
+<meta name='robots' content='max-image-preview:large' />
+<link rel='dns-prefetch' href='//fonts.googleapis.com' />
+<link href='https://fonts.gstatic.com' crossorigin rel='preconnect' />
+<link rel="alternate" type="application/rss+xml" title="Berec Sarl &raquo; Flux" href="https://www.berecsarl.com/feed/" />
+<link rel="alternate" type="application/rss+xml" title="Berec Sarl &raquo; Flux des commentaires" href="https://www.berecsarl.com/comments/feed/" />
+<link rel="alternate" title="oEmbed (JSON)" type="application/json+oembed" href="https://www.berecsarl.com/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fwww.berecsarl.com%2Fbook-an-appointment%2F" />
+<link rel="alternate" title="oEmbed (XML)" type="text/xml+oembed" href="https://www.berecsarl.com/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fwww.berecsarl.com%2Fbook-an-appointment%2F&#038;format=xml" />
+<style id="wp-img-auto-sizes-contain-inline-css">
+img:is([sizes=auto i],[sizes^="auto," i]){contain-intrinsic-size:3000px 1500px}
+/*# sourceURL=wp-img-auto-sizes-contain-inline-css */
+</style>
+<style id="wp-emoji-styles-inline-css">
+
+	img.wp-smiley, img.emoji {
+		display: inline !important;
+		border: none !important;
+		box-shadow: none !important;
+		height: 1em !important;
+		width: 1em !important;
+		margin: 0 0.07em !important;
+		vertical-align: -0.1em !important;
+		background: none !important;
+		padding: 0 !important;
+	}
+/*# sourceURL=wp-emoji-styles-inline-css */
+</style>
+<style id="wp-block-library-inline-css">
+:root{--wp-block-synced-color:#7a00df;--wp-block-synced-color--rgb:122,0,223;--wp-bound-block-color:var(--wp-block-synced-color);--wp-editor-canvas-background:#ddd;--wp-admin-theme-color:#007cba;--wp-admin-theme-color--rgb:0,124,186;--wp-admin-theme-color-darker-10:#006ba1;--wp-admin-theme-color-darker-10--rgb:0,107,160.5;--wp-admin-theme-color-darker-20:#005a87;--wp-admin-theme-color-darker-20--rgb:0,90,135;--wp-admin-border-width-focus:2px}@media (min-resolution:192dpi){:root{--wp-admin-border-width-focus:1.5px}}.wp-element-button{cursor:pointer}:root .has-very-light-gray-background-color{background-color:#eee}:root .has-very-dark-gray-background-color{background-color:#313131}:root .has-very-light-gray-color{color:#eee}:root .has-very-dark-gray-color{color:#313131}:root .has-vivid-green-cyan-to-vivid-cyan-blue-gradient-background{background:linear-gradient(135deg,#00d084,#0693e3)}:root .has-purple-crush-gradient-background{background:linear-gradient(135deg,#34e2e4,#4721fb 50%,#ab1dfe)}:root .has-hazy-dawn-gradient-background{background:linear-gradient(135deg,#faaca8,#dad0ec)}:root .has-subdued-olive-gradient-background{background:linear-gradient(135deg,#fafae1,#67a671)}:root .has-atomic-cream-gradient-background{background:linear-gradient(135deg,#fdd79a,#004a59)}:root .has-nightshade-gradient-background{background:linear-gradient(135deg,#330968,#31cdcf)}:root .has-midnight-gradient-background{background:linear-gradient(135deg,#020381,#2874fc)}:root{--wp--preset--font-size--normal:16px;--wp--preset--font-size--huge:42px}.has-regular-font-size{font-size:1em}.has-larger-font-size{font-size:2.625em}.has-normal-font-size{font-size:var(--wp--preset--font-size--normal)}.has-huge-font-size{font-size:var(--wp--preset--font-size--huge)}:root .has-text-align-center{text-align:center}:root .has-text-align-left{text-align:left}:root .has-text-align-right{text-align:right}.has-fit-text{white-space:nowrap!important}#end-resizable-editor-section{display:none}.aligncenter{clear:both}.items-justified-left{justify-content:flex-start}.items-justified-center{justify-content:center}.items-justified-right{justify-content:flex-end}.items-justified-space-between{justify-content:space-between}.screen-reader-text{word-wrap:normal!important;border:0;clip-path:inset(50%);height:1px;margin:-1px;overflow:hidden;padding:0;position:absolute;width:1px}.screen-reader-text:focus{background-color:#ddd;clip-path:none;color:#444;display:block;font-size:1em;height:auto;left:5px;line-height:normal;padding:15px 23px 14px;text-decoration:none;top:5px;width:auto;z-index:100000}html :where(.has-border-color){border-style:solid}html :where([style*=border-color]){border-style:solid}html :where([style*=border-top-color]){border-top-style:solid}html :where([style*=border-right-color]){border-right-style:solid}html :where([style*=border-bottom-color]){border-bottom-style:solid}html :where([style*=border-left-color]){border-left-style:solid}html :where([style*=border-width]){border-style:solid}html :where([style*=border-top-width]){border-top-style:solid}html :where([style*=border-right-width]){border-right-style:solid}html :where([style*=border-bottom-width]){border-bottom-style:solid}html :where([style*=border-left-width]){border-left-style:solid}html :where(img[class*=wp-image-]){height:auto;max-width:100%}:where(figure){margin:0 0 1em}html :where(.is-position-sticky){--wp-admin--admin-bar--position-offset:var(--wp-admin--admin-bar--height,0px)}@media screen and (max-width:600px){html :where(.is-position-sticky){--wp-admin--admin-bar--position-offset:0px}}
+
+/*# sourceURL=/wp-includes/css/dist/block-library/common.min.css */
+</style>
+<style id="classic-theme-styles-inline-css">
+/*! This file is auto-generated */
+.wp-block-button__link{color:#fff;background-color:#32373c;border-radius:9999px;box-shadow:none;text-decoration:none;padding:calc(.667em + 2px) calc(1.333em + 2px);font-size:1.125em}.wp-block-file__button{background:#32373c;color:#fff;text-decoration:none}
+/*# sourceURL=/wp-includes/css/classic-themes.min.css */
+</style>
+
+
+
+
+<style id="global-styles-inline-css">
+:root{--wp--preset--aspect-ratio--square: 1;--wp--preset--aspect-ratio--4-3: 4/3;--wp--preset--aspect-ratio--3-4: 3/4;--wp--preset--aspect-ratio--3-2: 3/2;--wp--preset--aspect-ratio--2-3: 2/3;--wp--preset--aspect-ratio--16-9: 16/9;--wp--preset--aspect-ratio--9-16: 9/16;--wp--preset--color--black: #000000;--wp--preset--color--cyan-bluish-gray: #abb8c3;--wp--preset--color--white: #ffffff;--wp--preset--color--pale-pink: #f78da7;--wp--preset--color--vivid-red: #cf2e2e;--wp--preset--color--luminous-vivid-orange: #ff6900;--wp--preset--color--luminous-vivid-amber: #fcb900;--wp--preset--color--light-green-cyan: #7bdcb5;--wp--preset--color--vivid-green-cyan: #00d084;--wp--preset--color--pale-cyan-blue: #8ed1fc;--wp--preset--color--vivid-cyan-blue: #0693e3;--wp--preset--color--vivid-purple: #9b51e0;--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple: linear-gradient(135deg,rgb(6,147,227) 0%,rgb(155,81,224) 100%);--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan: linear-gradient(135deg,rgb(122,220,180) 0%,rgb(0,208,130) 100%);--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange: linear-gradient(135deg,rgb(252,185,0) 0%,rgb(255,105,0) 100%);--wp--preset--gradient--luminous-vivid-orange-to-vivid-red: linear-gradient(135deg,rgb(255,105,0) 0%,rgb(207,46,46) 100%);--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray: linear-gradient(135deg,rgb(238,238,238) 0%,rgb(169,184,195) 100%);--wp--preset--gradient--cool-to-warm-spectrum: linear-gradient(135deg,rgb(74,234,220) 0%,rgb(151,120,209) 20%,rgb(207,42,186) 40%,rgb(238,44,130) 60%,rgb(251,105,98) 80%,rgb(254,248,76) 100%);--wp--preset--gradient--blush-light-purple: linear-gradient(135deg,rgb(255,206,236) 0%,rgb(152,150,240) 100%);--wp--preset--gradient--blush-bordeaux: linear-gradient(135deg,rgb(254,205,165) 0%,rgb(254,45,45) 50%,rgb(107,0,62) 100%);--wp--preset--gradient--luminous-dusk: linear-gradient(135deg,rgb(255,203,112) 0%,rgb(199,81,192) 50%,rgb(65,88,208) 100%);--wp--preset--gradient--pale-ocean: linear-gradient(135deg,rgb(255,245,203) 0%,rgb(182,227,212) 50%,rgb(51,167,181) 100%);--wp--preset--gradient--electric-grass: linear-gradient(135deg,rgb(202,248,128) 0%,rgb(113,206,126) 100%);--wp--preset--gradient--midnight: linear-gradient(135deg,rgb(2,3,129) 0%,rgb(40,116,252) 100%);--wp--preset--font-size--small: 13px;--wp--preset--font-size--medium: 20px;--wp--preset--font-size--large: 36px;--wp--preset--font-size--x-large: 42px;--wp--preset--spacing--20: 0.44rem;--wp--preset--spacing--30: 0.67rem;--wp--preset--spacing--40: 1rem;--wp--preset--spacing--50: 1.5rem;--wp--preset--spacing--60: 2.25rem;--wp--preset--spacing--70: 3.38rem;--wp--preset--spacing--80: 5.06rem;--wp--preset--shadow--natural: 6px 6px 9px rgba(0, 0, 0, 0.2);--wp--preset--shadow--deep: 12px 12px 50px rgba(0, 0, 0, 0.4);--wp--preset--shadow--sharp: 6px 6px 0px rgba(0, 0, 0, 0.2);--wp--preset--shadow--outlined: 6px 6px 0px -3px rgb(255, 255, 255), 6px 6px rgb(0, 0, 0);--wp--preset--shadow--crisp: 6px 6px 0px rgb(0, 0, 0);}:where(body) { margin: 0; }:where(.is-layout-flex){gap: 0.5em;}:where(.is-layout-grid){gap: 0.5em;}body .is-layout-flex{display: flex;}.is-layout-flex{flex-wrap: wrap;align-items: center;}.is-layout-flex > :is(*, div){margin: 0;}body .is-layout-grid{display: grid;}.is-layout-grid > :is(*, div){margin: 0;}body{padding-top: 0px;padding-right: 0px;padding-bottom: 0px;padding-left: 0px;}:root :where(.wp-element-button, .wp-block-button__link){background-color: #32373c;border-width: 0;color: #fff;font-family: inherit;font-size: inherit;font-style: inherit;font-weight: inherit;letter-spacing: inherit;line-height: inherit;padding-top: calc(0.667em + 2px);padding-right: calc(1.333em + 2px);padding-bottom: calc(0.667em + 2px);padding-left: calc(1.333em + 2px);text-decoration: none;text-transform: inherit;}.has-black-color{color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-color{color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-color{color: var(--wp--preset--color--white) !important;}.has-pale-pink-color{color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-color{color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-color{color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-color{color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-color{color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-color{color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-color{color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-color{color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-color{color: var(--wp--preset--color--vivid-purple) !important;}.has-black-background-color{background-color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-background-color{background-color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-background-color{background-color: var(--wp--preset--color--white) !important;}.has-pale-pink-background-color{background-color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-background-color{background-color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-background-color{background-color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-background-color{background-color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-background-color{background-color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-background-color{background-color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-background-color{background-color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-background-color{background-color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-background-color{background-color: var(--wp--preset--color--vivid-purple) !important;}.has-black-border-color{border-color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-border-color{border-color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-border-color{border-color: var(--wp--preset--color--white) !important;}.has-pale-pink-border-color{border-color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-border-color{border-color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-border-color{border-color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-border-color{border-color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-border-color{border-color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-border-color{border-color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-border-color{border-color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-border-color{border-color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-border-color{border-color: var(--wp--preset--color--vivid-purple) !important;}.has-vivid-cyan-blue-to-vivid-purple-gradient-background{background: var(--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple) !important;}.has-light-green-cyan-to-vivid-green-cyan-gradient-background{background: var(--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan) !important;}.has-luminous-vivid-amber-to-luminous-vivid-orange-gradient-background{background: var(--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange) !important;}.has-luminous-vivid-orange-to-vivid-red-gradient-background{background: var(--wp--preset--gradient--luminous-vivid-orange-to-vivid-red) !important;}.has-very-light-gray-to-cyan-bluish-gray-gradient-background{background: var(--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray) !important;}.has-cool-to-warm-spectrum-gradient-background{background: var(--wp--preset--gradient--cool-to-warm-spectrum) !important;}.has-blush-light-purple-gradient-background{background: var(--wp--preset--gradient--blush-light-purple) !important;}.has-blush-bordeaux-gradient-background{background: var(--wp--preset--gradient--blush-bordeaux) !important;}.has-luminous-dusk-gradient-background{background: var(--wp--preset--gradient--luminous-dusk) !important;}.has-pale-ocean-gradient-background{background: var(--wp--preset--gradient--pale-ocean) !important;}.has-electric-grass-gradient-background{background: var(--wp--preset--gradient--electric-grass) !important;}.has-midnight-gradient-background{background: var(--wp--preset--gradient--midnight) !important;}.has-small-font-size{font-size: var(--wp--preset--font-size--small) !important;}.has-medium-font-size{font-size: var(--wp--preset--font-size--medium) !important;}.has-large-font-size{font-size: var(--wp--preset--font-size--large) !important;}.has-x-large-font-size{font-size: var(--wp--preset--font-size--x-large) !important;}
+/*# sourceURL=global-styles-inline-css */
+</style>
+
+
+
+
+<style id="rs-plugin-settings-inline-css">
+#rs-demo-id {}
+/*# sourceURL=rs-plugin-settings-inline-css */
+</style>
+
+<link rel='stylesheet' id='woocommerce-smallscreen-css' href='https://www.berecsarl.com/wp-content/plugins/woocommerce/assets/css/woocommerce-smallscreen.css?ver=11.0.1' media='only screen and (max-width: 768px)' />
+
+<style id="woocommerce-inline-inline-css">
+.woocommerce form .form-row .required { visibility: visible; }
+/*# sourceURL=woocommerce-inline-inline-css */
+</style>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<noscript></noscript><style id="rocket-lazyload-inline-css">
+.rll-youtube-player{position:relative;padding-bottom:56.23%;height:0;overflow:hidden;max-width:100%;}.rll-youtube-player iframe{position:absolute;top:0;left:0;width:100%;height:100%;z-index:100;background:0 0}.rll-youtube-player img{bottom:0;display:block;left:0;margin:auto;max-width:100%;width:100%;position:absolute;right:0;top:0;border:none;height:auto;cursor:pointer;-webkit-transition:.4s all;-moz-transition:.4s all;transition:.4s all}.rll-youtube-player img:hover{-webkit-filter:brightness(75%)}.rll-youtube-player .play{height:72px;width:72px;left:50%;top:50%;margin-left:-36px;margin-top:-36px;position:absolute;background:url(https://www.berecsarl.com/wp-content/plugins/wp-rocket/assets/img/youtube.png) no-repeat;cursor:pointer}.wp-has-aspect-ratio .rll-youtube-player{position:absolute;padding-bottom:0;width:100%;height:100%;top:0;bottom:0;left:0;right:0}
+/*# sourceURL=rocket-lazyload-inline-css */
+</style>
+<script type="rocketlazyloadscript" id="jquery-core-js" src="https://www.berecsarl.com/wp-includes/js/jquery/jquery.min.js?ver=3.7.1" defer></script>
+<script type="rocketlazyloadscript" id="jquery-migrate-js" src="https://www.berecsarl.com/wp-includes/js/jquery/jquery-migrate.min.js?ver=3.4.1" defer></script>
+<script type="rocketlazyloadscript" id="tp-tools-js" src="https://www.berecsarl.com/wp-content/plugins/revslider/public/assets/js/rbtools.min.js?ver=6.4.8" defer></script>
+<script type="rocketlazyloadscript" id="revmin-js" src="https://www.berecsarl.com/wp-content/plugins/revslider/public/assets/js/rs6.min.js?ver=6.4.11" defer></script>
+<script type="rocketlazyloadscript" data-wp-strategy="defer" id="wc-jquery-blockui-js" src="https://www.berecsarl.com/wp-content/plugins/woocommerce/assets/js/jquery-blockui/jquery.blockUI.min.js?ver=2.7.0-wc.11.0.1" defer></script>
+<script id="wc-add-to-cart-js-extra">
+var wc_add_to_cart_params = {"ajax_url":"/wp-admin/admin-ajax.php","wc_ajax_url":"/?wc-ajax=%%endpoint%%","i18n_view_cart":"Voir le panier","cart_url":"https://www.berecsarl.com/cart/","is_cart":"","cart_redirect_after_add":"no"};
+//# sourceURL=wc-add-to-cart-js-extra
+</script>
+<script type="rocketlazyloadscript" data-wp-strategy="defer" id="wc-add-to-cart-js" src="https://www.berecsarl.com/wp-content/plugins/woocommerce/assets/js/frontend/add-to-cart.min.js?ver=11.0.1" defer></script>
+<script type="rocketlazyloadscript" data-wp-strategy="defer" defer id="wc-js-cookie-js" src="https://www.berecsarl.com/wp-content/plugins/woocommerce/assets/js/js-cookie/js.cookie.min.js?ver=2.1.4-wc.11.0.1"></script>
+<script id="woocommerce-js-extra">
+var woocommerce_params = {"ajax_url":"/wp-admin/admin-ajax.php","wc_ajax_url":"/?wc-ajax=%%endpoint%%","i18n_password_show":"Afficher le mot de passe","i18n_password_hide":"Masquer le mot de passe"};
+//# sourceURL=woocommerce-js-extra
+</script>
+<script type="rocketlazyloadscript" data-wp-strategy="defer" defer id="woocommerce-js" src="https://www.berecsarl.com/wp-content/plugins/woocommerce/assets/js/frontend/woocommerce.min.js?ver=11.0.1"></script>
+<script type="rocketlazyloadscript" data-minify="1" id="vc_woocommerce-add-to-cart-js-js" src="https://www.berecsarl.com/wp-content/cache/min/1/wp-content/plugins/js_composer/assets/js/vendors/woocommerce-add-to-cart.js?ver=1780675020" defer></script>
+<link rel="https://api.w.org/" href="https://www.berecsarl.com/wp-json/" /><link rel="alternate" title="JSON" type="application/json" href="https://www.berecsarl.com/wp-json/wp/v2/pages/8282" /><link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://www.berecsarl.com/xmlrpc.php?rsd" />
+<link rel="canonical" href="https://www.berecsarl.com/book-an-appointment/" />
+<meta name="generator" content="Redux 4.5.11" /><noscript><style type="text/css">.mptt-shortcode-wrapper .mptt-shortcode-table:first-of-type{display:table!important}.mptt-shortcode-wrapper .mptt-shortcode-table .mptt-event-container:hover{height:auto!important;min-height:100%!important}body.mprm_ie_browser .mptt-shortcode-wrapper .mptt-event-container{height:auto!important}@media (max-width:767px){.mptt-shortcode-wrapper .mptt-shortcode-table:first-of-type{display:none!important}}</style></noscript>			<link rel="icon" href="https://www.berecsarl.com/wp-content/uploads/2020/03/MENU-LOGO-2.jpg" sizes="32x32" />
+			<link rel="icon" href="https://www.berecsarl.com/wp-content/uploads/2020/03/MENU-LOGO-2.jpg" sizes="192x192">
+			<link rel="apple-touch-icon-precomposed" href="https://www.berecsarl.com/wp-content/uploads/2020/03/MENU-LOGO-2.jpg" />
+			<meta name="msapplication-TileImage" content="https://www.berecsarl.com/wp-content/uploads/2020/03/MENU-LOGO-2.jpg" />
+					<noscript><style>.woocommerce-product-gallery{ opacity: 1 !important; }</style></noscript>
+	<style>.recentcomments a{display:inline !important;padding:0 !important;margin:0 !important;}</style><meta name="generator" content="Powered by WPBakery Page Builder - drag and drop page builder for WordPress."/>
+<meta name="generator" content="Powered by Slider Revolution 6.4.11 - responsive, Mobile-Friendly Slider Plugin for WordPress with comfortable drag and drop interface." />
+<script type="rocketlazyloadscript" data-rocket-type="text/javascript">function setREVStartSize(e){
+			//window.requestAnimationFrame(function() {				 
+				window.RSIW = window.RSIW===undefined ? window.innerWidth : window.RSIW;	
+				window.RSIH = window.RSIH===undefined ? window.innerHeight : window.RSIH;	
+				try {								
+					var pw = document.getElementById(e.c).parentNode.offsetWidth,
+						newh;
+					pw = pw===0 || isNaN(pw) ? window.RSIW : pw;
+					e.tabw = e.tabw===undefined ? 0 : parseInt(e.tabw);
+					e.thumbw = e.thumbw===undefined ? 0 : parseInt(e.thumbw);
+					e.tabh = e.tabh===undefined ? 0 : parseInt(e.tabh);
+					e.thumbh = e.thumbh===undefined ? 0 : parseInt(e.thumbh);
+					e.tabhide = e.tabhide===undefined ? 0 : parseInt(e.tabhide);
+					e.thumbhide = e.thumbhide===undefined ? 0 : parseInt(e.thumbhide);
+					e.mh = e.mh===undefined || e.mh=="" || e.mh==="auto" ? 0 : parseInt(e.mh,0);		
+					if(e.layout==="fullscreen" || e.l==="fullscreen") 						
+						newh = Math.max(e.mh,window.RSIH);					
+					else{					
+						e.gw = Array.isArray(e.gw) ? e.gw : [e.gw];
+						for (var i in e.rl) if (e.gw[i]===undefined || e.gw[i]===0) e.gw[i] = e.gw[i-1];					
+						e.gh = e.el===undefined || e.el==="" || (Array.isArray(e.el) && e.el.length==0)? e.gh : e.el;
+						e.gh = Array.isArray(e.gh) ? e.gh : [e.gh];
+						for (var i in e.rl) if (e.gh[i]===undefined || e.gh[i]===0) e.gh[i] = e.gh[i-1];
+											
+						var nl = new Array(e.rl.length),
+							ix = 0,						
+							sl;					
+						e.tabw = e.tabhide>=pw ? 0 : e.tabw;
+						e.thumbw = e.thumbhide>=pw ? 0 : e.thumbw;
+						e.tabh = e.tabhide>=pw ? 0 : e.tabh;
+						e.thumbh = e.thumbhide>=pw ? 0 : e.thumbh;					
+						for (var i in e.rl) nl[i] = e.rl[i]<window.RSIW ? 0 : e.rl[i];
+						sl = nl[0];									
+						for (var i in nl) if (sl>nl[i] && nl[i]>0) { sl = nl[i]; ix=i;}															
+						var m = pw>(e.gw[ix]+e.tabw+e.thumbw) ? 1 : (pw-(e.tabw+e.thumbw)) / (e.gw[ix]);					
+						newh =  (e.gh[ix] * m) + (e.tabh + e.thumbh);
+					}				
+					if(window.rs_init_css===undefined) window.rs_init_css = document.head.appendChild(document.createElement("style"));					
+					document.getElementById(e.c).height = newh+"px";
+					window.rs_init_css.innerHTML += "#"+e.c+"_wrapper { height: "+newh+"px }";				
+				} catch(e){
+					console.log("Failure at Presize of Slider:" + e)
+				}					   
+			//});
+		  };</script>
+<style id="wp-custom-css">
+
+				.icon-hover > .vc_column-inner > .wpb_wrapper > .wpb_single_image{
+	transition: transform .3s ease-out;
+}
+.icon-hover:hover > .vc_column-inner > .wpb_wrapper > .wpb_single_image{
+	transform: translate(0, -10px);
+}
+
+.icon-hover .radiantthemes-iconbox{
+transition: transform .3s ease-out;
+}
+.icon-hover:hover .radiantthemes-iconbox{
+transform: translate(0, -10px);
+}
+
+.custom-box-shadow-2{
+       box-shadow: 0px 0px 40px rgba(0, 0, 0, 0.12);
+}
+
+.box-shadow{
+   box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.11);
+}
+
+
+.table>tbody>tr:first-child td{border-top:none!important;}
+.table>tbody>tr>td{
+    padding:14px 0px;
+    border-top: 1px solid rgba(255, 255, 255, 0.21) !important;
+    }
+.spacing-table>div>.table>tbody>tr>td{
+    padding:14px 14px;
+    
+}
+
+.wraper_header.style-twelve .header_main_action ul > li.header-cart-bar > .header-cart-bar-icon .cart-count {
+    background-color: #084e4d !important;
+}
+.wraper_header.style-twelve .header_main_action ul > li.header-cart-bar > .header-cart-bar-icon .cart-count{
+background-color: #fff !important;
+color: #4575bd;
+border: 2px solid #4575bd;
+line-height: 15px !important;
+}
+
+.facilities-image-left{
+width:658px;
+}
+
+
+.table-two>tbody>tr:first-child td{border-top:none!important;}
+.table-two>tbody>tr>td{
+    padding:14px 0px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.21) !important;
+    }
+.spacing-table>div>.table-two>tbody>tr>td{
+    padding:14px 14px;
+    
+}
+.facilities-image-left{
+    width:658px;
+}
+.table-two>tbody>tr:first-child td{border-top:none!important;}
+.table-two>tbody>tr>td{
+	padding: 6px 0;
+	border-bottom: none !important;
+	font-size: 17px;
+	color: #fff;
+}
+.spacing-table>div>.table-two>tbody>tr>td{
+    padding:14px 14px;
+    
+}
+.table-two{
+	width:100%;
+	border-top: 1px solid #fff;
+	border-bottom: 1px solid #fff;
+}
+.table-two > tbody > tr:first-child td {
+    padding-top: 20px;
+}
+.table-two > tbody > tr:last-child td{
+    padding-bottom: 20px;
+}
+.doctor-video-content>div{
+max-width:616px;
+align-self: flex-end;
+float:right
+}
+.singel-girl-position{
+position:relative;
+top:-200px;
+}
+.contact-section{
+position:relative;
+}
+.contact-section .vc_col-sm-7:after{
+position:absolute;
+content:" ";
+height:100%;
+width:20%;
+background:#2986e2;
+right:-123px;
+top:0;
+}
+
+/* LARGE DESKTOP PART */
+@media screen and (min-width:1200px){
+}
+
+/* DESKTOP PART */
+@media screen and (min-width:992px) and (max-width:1199px){
+
+}
+
+/* TABLET LANDSCAPE PART */
+@media screen and (min-width:768px) and (max-width:991px){
+}
+
+/* TABLET PROTRAIT PART */
+@media screen and (min-width:480px) and (max-width:767px){
+.contact-section .vc_col-sm-7::after{
+display:none;
+}
+}
+
+/* SMART PHONE LANDSCAPE PART */
+@media screen and (min-width:321px) and (max-width:479px){
+.contact-section .vc_col-sm-7::after{
+display:none;
+}
+}
+
+/* SMART PHONE PROTRAIT PART */
+@media screen and (max-width:320px){
+.contact-section .vc_col-sm-7::after{
+display:none;
+}
+}
+		
+</style>
+<style id="apexclinic_theme_option-dynamic-css" title="dynamic-css" class="redux-options-output">body{background-color:#e8e8e8;}body{font-family:Rubik;line-height:28px;font-weight:400;font-style:normal;color:#434343;font-size:15px;}h1{font-family:Poppins;line-height:48px;letter-spacing:-1px;font-weight:700;font-style:normal;color:#2d2d2d;font-size:40px;}h2{font-family:Poppins;line-height:48px;letter-spacing:-1px;font-weight:800;font-style:normal;color:#2d2d2d;font-size:40px;}h3{font-family:Poppins;line-height:48px;letter-spacing:0px;font-weight:800;font-style:normal;color:#2d2d2d;font-size:40px;}h4{font-family:Poppins;line-height:30px;font-weight:700;font-style:normal;color:#313131;font-size:20px;}h5{font-family:Poppins;line-height:26px;font-weight:500;font-style:normal;color:#2d2d2d;font-size:18px;}h6{font-family:Poppins;line-height:23px;font-weight:600;font-style:normal;color:#2d2d2d;font-size:15px;}.page-transition-layer{background-color:#ffffff;}.page-transition-layer-spinner .page-transition-layer-spinner-path{stroke:#2986e2;}.scrollup{background-color:#32bd8e;}.wraper_header.style-default .wraper_header_top{background-color:#ffffff;}.wraper_header.style-one .wraper_header_main{background-color:rgba(0,0,0,0.01);}.wraper_header.style-one .wraper_header_main{border-bottom-color:rgba(255,255,255,0.2);}.wraper_header.style-one .nav > [class*="menu-"] > ul.menu > li > a{font-family:Rubik;text-transform:uppercase;line-height:27px;font-weight:500;font-style:normal;color:#ffffff;font-size:13px;}.wraper_header.style-one .nav > [class*="menu-"] > ul.menu > li > ul > li > a, .wraper_header.style-one .nav > [class*="menu-"] > ul.menu > li > ul > li > ul > li > a, .wraper_header.style-one .nav > [class*="menu-"] > ul.menu > li > ul > li > ul > li > ul > li > a, .wraper_header.style-one .nav > [class*="menu-"] > ul.menu > li > ul > li > ul > li > ul > li ul li a{font-family:Rubik;text-align:left;text-transform:uppercase;line-height:25px;font-weight:400;font-style:normal;color:#0c121f;font-size:13px;}.wraper_header.style-one .header_main_action ul > li.header-cart-bar i{color:#FFFFFF;}.wraper_header.style-one .header_main_action ul > li.floating-searchbar i{color:#FFFFFF;}.wraper_header.style-one .header_main_action ul > li.header-hamburger i{color:#FFFFFF;}body[data-header-style="header-style-one"] #hamburger-menu{background-color:#ffffff;}.wraper_header.style-one .header_main .responsive-nav i{color:#838383;}body[data-header-style="header-style-one"] #mobile-menu{background-color:#ffffff;}body[data-header-style="header-style-one"] .mobile-menu-nav{font-family:Poppins;text-transform:uppercase;line-height:27px;letter-spacing:0.5px;font-weight:400;font-style:normal;color:#838383;font-size:13px;}body[data-header-style="header-style-one"] .mobile-menu-close i{color:#838383;}.wraper_header.style-two .wraper_header_main{background-color:rgba(255,255,255,0.01);}.wraper_header.style-two .nav > [class*="menu-"] > ul.menu > li > a{font-family:Poppins;line-height:26px;font-weight:500;font-style:normal;color:#ffffff;font-size:15px;}.wraper_header.style-two .nav > [class*="menu-"] > ul.menu > li > ul > li > a, .wraper_header.style-two .nav > [class*="menu-"] > ul.menu > li > ul > li > ul > li > a, .wraper_header.style-two .nav > [class*="menu-"] > ul.menu > li > ul > li > ul > li > ul > li > a, .wraper_header.style-two .nav > [class*="menu-"] > ul.menu > li > ul > li > ul > li > ul > li ul li a{font-family:Poppins;text-align:left;line-height:25px;font-weight:500;font-style:normal;color:#454545;font-size:15px;}.wraper_header.style-two .header_main_action ul > li.header-cart-bar i{color:#FFFFFF;}.wraper_header.style-two .header_main_action ul > li.floating-searchbar i{color:#FFFFFF;}.wraper_header.style-two .header_main_action ul > li.header-hamburger i{color:#FFFFFF;}body[data-header-style="header-style-two"] #hamburger-menu{background-color:#ffffff;}.wraper_header.style-two .header_main .responsive-nav i{color:#FFFFFF;}body[data-header-style="header-style-two"] #mobile-menu{background-color:#ffffff;}body[data-header-style="header-style-two"] .mobile-menu-nav{font-family:Poppins;text-transform:uppercase;line-height:27px;letter-spacing:0.5px;font-weight:400;font-style:normal;color:#838383;font-size:13px;}body[data-header-style="header-style-two"] .mobile-menu-close i{color:#838383;}.wraper_header.style-three .wraper_header_top{background-color:#244e7d;}.wraper_header.style-three .wraper_header_main{background-color:#ffffff;}.wraper_header.style-three .nav > [class*="menu-"] > ul.menu > li > a{font-family:Rubik;text-transform:uppercase;line-height:26px;font-weight:500;font-style:normal;color:#474747;font-size:13px;}.wraper_header.style-three .nav > [class*="menu-"] > ul.menu > li > ul > li > a, .wraper_header.style-three .nav > [class*="menu-"] > ul.menu > li > ul > li > ul > li > a, .wraper_header.style-three .nav > [class*="menu-"] > ul.menu > li > ul > li > ul > li > ul > li > a, .wraper_header.style-three .nav > [class*="menu-"] > ul.menu > li > ul > li > ul > li > ul > li ul li a{font-family:Rubik;text-align:left;text-transform:uppercase;line-height:26px;font-weight:400;font-style:normal;color:#474747;font-size:13px;}.wraper_header.style-three .nav > [class*="menu-"] > ul.menu > li:hover > a, .wraper_header.style-three .nav > [class*="menu-"] > ul.menu > li.current-menu-item > a, .wraper_header.style-three .nav > [class*="menu-"] > ul.menu > li.current-menu-parent > a, .wraper_header.style-three .nav > [class*="menu-"] > ul.menu > li.current-menu-ancestor > a, .wraper_header.style-three .nav > [class*="menu-"] > ul.menu > li > ul > li:hover > a, .wraper_header.style-three .nav > [class*="menu-"] > ul.menu > li > ul > li.current-menu-item > a, .wraper_header.style-three .nav > [class*="menu-"] > ul.menu > li > ul > li.current-menu-parent > a, .wraper_header.style-three .nav > [class*="menu-"] > ul.menu > li > ul > li > ul > li:hover > a, .wraper_header.style-three .nav > [class*="menu-"] > ul.menu > li > ul > li > ul > li.current-menu-item > a, .wraper_header.style-three .nav > [class*="menu-"] > ul.menu > li > ul > li > ul > li.current-menu-parent > a, .wraper_header.style-three .nav > [class*="menu-"] > ul.menu > li > ul > li > ul > li > ul > li:hover > a, .wraper_header.style-three .nav > [class*="menu-"] > ul.menu > li > ul > li > ul > li > ul > li.current-menu-item > a, .wraper_header.style-three .nav > [class*="menu-"] > ul.menu > li > ul > li > ul > li > ul > li.current-menu-parent > a, .wraper_header.style-three .nav > [class*="menu-"] > ul.menu > li > ul > li > ul > li > ul > li ul li:hover a, .wraper_header.style-three .nav > [class*="menu-"] > ul.menu > li > ul > li > ul > li > ul > li ul li.current-menu-item a, .wraper_header.style-three .nav > [class*="menu-"] > ul.menu > li > ul > li > ul > li > ul > li ul li.current-menu-parent a{color:#F06082;}.wraper_header.style-three .header_main_action ul > li.header-cart-bar i{color:#1E1E1E;}.wraper_header.style-three .header_main_action ul > li.floating-searchbar i{color:#1E1E1E;}.wraper_header.style-three .header_main_action ul > li.header-hamburger i{color:#1E1E1E;}body[data-header-style="header-style-three"] #hamburger-menu{background-color:#ffffff;}.wraper_header.style-three .header_main .responsive-nav i{color:#838383;}body[data-header-style="header-style-three"] #mobile-menu{background-color:#ffffff;}body[data-header-style="header-style-three"] .mobile-menu-nav{font-family:Poppins;text-transform:uppercase;line-height:27px;letter-spacing:0.5px;font-weight:400;font-style:normal;color:#838383;font-size:13px;}body[data-header-style="header-style-three"] .mobile-menu-close i{color:#838383;}.wraper_header.style-four .wraper_header_main{background-color:rgba(0,0,0,0.01);}.wraper_header.style-four .nav > [class*="menu-"] > ul.menu > li > a{font-family:Rubik;line-height:28px;font-weight:500;font-style:normal;color:#ffffff;font-size:17px;}.wraper_header.style-four .nav > [class*="menu-"] > ul.menu > li > ul > li > a, .wraper_header.style-four .nav > [class*="menu-"] > ul.menu > li > ul > li > ul > li > a, .wraper_header.style-four .nav > [class*="menu-"] > ul.menu > li > ul > li > ul > li > ul > li > a, .wraper_header.style-four .nav > [class*="menu-"] > ul.menu > li > ul > li > ul > li > ul > li ul li a{font-family:Rubik;text-align:left;text-transform:uppercase;line-height:25px;font-weight:400;font-style:normal;color:#0c121f;font-size:13px;}.wraper_header.style-four .header_main_action ul > li.header-cart-bar i{color:#FFFFFF;}.wraper_header.style-four .header_main_action ul > li.header-hamburger i{color:#FFFFFF;}body[data-header-style="header-style-four"] #hamburger-menu{background-color:#ffffff;}.wraper_header.style-four .header_main .responsive-nav i{color:#838383;}body[data-header-style="header-style-four"] #mobile-menu{background-color:#ffffff;}body[data-header-style="header-style-four"] .mobile-menu-nav{font-family:Poppins;text-transform:uppercase;line-height:27px;letter-spacing:0.5px;font-weight:400;font-style:normal;color:#838383;font-size:13px;}body[data-header-style="header-style-four"] .mobile-menu-close i{color:#838383;}.wraper_header.style-five .wraper_header_main{background-color:rgba(255,255,255,0.75);}.wraper_header.style-five .nav > [class*="menu-"] > ul.menu > li > a{font-family:Rubik;line-height:28px;font-weight:400;font-style:normal;color:#0c121f;font-size:16px;}.wraper_header.style-five .nav > [class*="menu-"] > ul.menu > li > ul > li > a, .wraper_header.style-five .nav > [class*="menu-"] > ul.menu > li > ul > li > ul > li > a, .wraper_header.style-five .nav > [class*="menu-"] > ul.menu > li > ul > li > ul > li > ul > li > a, .wraper_header.style-five .nav > [class*="menu-"] > ul.menu > li > ul > li > ul > li > ul > li ul li a{font-family:Rubik;text-align:left;text-transform:uppercase;line-height:25px;font-weight:400;font-style:normal;color:#0c121f;font-size:13px;}.wraper_header.style-five .header_main_action ul > li.header-cart-bar i{color:#454545;}.wraper_header.style-five .header_main_action ul > li.floating-searchbar i{color:#454545;}.wraper_header.style-five .header_main_action ul > li.header-hamburger i{color:#454545;}body[data-header-style="header-style-five"] #hamburger-menu{background-color:#ffffff;}.wraper_header.style-five .header_main .responsive-nav i{color:#838383;}body[data-header-style="header-style-five"] #mobile-menu{background-color:#ffffff;}body[data-header-style="header-style-five"] .mobile-menu-nav{font-family:Poppins;text-transform:uppercase;line-height:27px;letter-spacing:0.5px;font-weight:400;font-style:normal;color:#838383;font-size:13px;}body[data-header-style="header-style-five"] .mobile-menu-close i{color:#838383;}.wraper_header.style-six .wraper_header_main{background-color:rgba(0,0,0,0.01);}.wraper_header.style-six .header_main_action ul > li.header-cart-bar i{color:#FFFFFF;}.wraper_header.style-six .header_main_action ul > li.floating-searchbar i{color:#FFFFFF;}.wraper_header.style-six .header_main_action ul > li.header-full-width-menu i{color:#FFFFFF;}.wraper_header.style-six .top-bar-menu .menu-minimal-header-menu-container{font-family:Cinzel;line-height:30px;font-weight:400;font-style:normal;color:#ffffff;font-size:28px;}.wraper_header.style-seven .wraper_header_main{background-color:rgba(0,0,0,0.01);}.wraper_header.style-seven .header_main_action ul > li.header-cart-bar i{color:#0C121F;}.wraper_header.style-seven .header_main_action ul > li.floating-searchbar i{color:#0C121F;}.wraper_header.style-seven .header_main_action ul > li.header-hamburger i{color:#0C121F;}body[data-header-style="header-style-seven"] #hamburger-menu{background-color:#ffffff;}.wraper_header.style-eight .wraper_header_main{background-color:#ffffff;}.wraper_header.style-eight .wraper_header_main{border-bottom-color:rgba(0,0,0,0.07);}.wraper_header.style-eight .header_main_action ul > li.header-cart-bar i{color:#030712;}.wraper_header.style-eight .header_main_action ul > li.floating-searchbar i{color:#030712;}.wraper_header.style-eight .header_main_action ul > li.header-hamburger i{color:#030712;}body[data-header-style="header-style-eight"] #hamburger-menu{background-color:#ffffff;}.wraper_header.style-nine .wraper_fullwidth_menu{background-color:#ffffff;}.wraper_header.style-nine .wraper_fullwidth_menu .full-inner nav{font-family:Poppins;line-height:47px;letter-spacing:-1px;font-weight:700;font-style:normal;color:#252525;font-size:40px;}.wraper_header.style-nine .wraper_fullwidth_menu .full-inner nav ul li ul{font-family:Poppins;line-height:23px;font-weight:500;font-style:normal;color:#252525;font-size:15px;}.wraper_header.style-nine .header_main_action ul > li.header-cart-bar i{color:#030712;}.wraper_header.style-nine .header_main_action ul > li.floating-searchbar i{color:#030712;}.wraper_header.style-ten .wraper_header_top{background-color:rgba(255,255,255,0.6);}.wraper_header.style-ten .wraper_header_main{background-color:rgba(255,255,255,0.01);}.wraper_header.style-ten .is-sticky .wraper_header_main{background-color:rgba(32,44,69,0.85);}.wraper_header.style-ten .nav > [class*="menu-"] > ul.menu > li > a{font-family:Rubik;text-transform:uppercase;line-height:26px;font-weight:500;font-style:normal;color:#ffffff;font-size:13px;}.wraper_header.style-ten .nav > [class*="menu-"] > ul.menu > li > ul > li > a, .wraper_header.style-ten .nav > [class*="menu-"] > ul.menu > li > ul > li > ul > li > a, .wraper_header.style-ten .nav > [class*="menu-"] > ul.menu > li > ul > li > ul > li > ul > li > a, .wraper_header.style-ten .nav > [class*="menu-"] > ul.menu > li > ul > li > ul > li > ul > li ul li a{font-family:Rubik;text-align:left;text-transform:uppercase;line-height:25px;font-weight:400;font-style:normal;color:#454545;font-size:13px;}.wraper_header.style-ten .header_main_action ul > li.header-cart-bar i{color:#FFFFFF;}.wraper_header.style-ten .header_main_action ul > li.floating-searchbar i{color:#FFFFFF;}.wraper_header.style-ten .header_main_action ul > li.header-hamburger i{color:#FFFFFF;}body[data-header-style="header-style-ten"] #hamburger-menu{background-color:#ffffff;}.wraper_header.style-ten .header_main .responsive-nav i{color:#FFFFFF;}body[data-header-style="header-style-ten"] #mobile-menu{background-color:#ffffff;}body[data-header-style="header-style-ten"] .mobile-menu-nav{font-family:Poppins;text-transform:uppercase;line-height:27px;letter-spacing:0.5px;font-weight:400;font-style:normal;color:#838383;font-size:13px;}body[data-header-style="header-style-ten"] .mobile-menu-close i{color:#838383;}.wraper_header.style-eleven .wraper_header_main{background-color:rgba(255,255,255,0.01);}.wraper_header.style-eleven .nav > [class*="menu-"] > ul.menu > li > a{font-family:Poppins;line-height:27px;font-weight:500;font-style:normal;color:#0c121f;font-size:15px;}.wraper_header.style-eleven .nav > [class*="menu-"] > ul.menu > li > ul > li > a, .wraper_header.style-eleven .nav > [class*="menu-"] > ul.menu > li > ul > li > ul > li > a, .wraper_header.style-eleven .nav > [class*="menu-"] > ul.menu > li > ul > li > ul > li > ul > li > a, .wraper_header.style-eleven .nav > [class*="menu-"] > ul.menu > li > ul > li > ul > li > ul > li ul li a{font-family:Poppins;text-align:left;line-height:25px;font-weight:400;font-style:normal;color:#454545;font-size:13px;}.wraper_header.style-eleven .header_main_action_buttons .btn.btn-one{background-color:#4eafcb;}.wraper_header.style-eleven .header_main_action_buttons .btn.btn-two{background-color:#25c16f;}.wraper_header.style-eleven .header_main .responsive-nav i{color:#838383;}body[data-header-style="header-style-eleven"] #mobile-menu{background-color:#ffffff;}body[data-header-style="header-style-eleven"] .mobile-menu-nav{font-family:Poppins;text-transform:uppercase;line-height:27px;letter-spacing:0.5px;font-weight:400;font-style:normal;color:#838383;font-size:13px;}body[data-header-style="header-style-eleven"] .mobile-menu-close i{color:#838383;}.wraper_header.style-twelve .wraper_header_top{background-color:#ffffff;}.wraper_header.style-twelve .wraper_header_main{background-color:#305893;}.wraper_header.style-twelve .is-sticky .wraper_header_main{background-color:rgba(48,88,147,0.49);}.wraper_header.style-twelve .nav > [class*="menu-"] > ul.menu > li > a{font-family:Rubik;text-transform:uppercase;line-height:26px;font-weight:500;font-style:normal;color:#ffffff;font-size:13px;}.wraper_header.style-twelve .nav > [class*="menu-"] > ul.menu > li > ul > li > a, .wraper_header.style-twelve .nav > [class*="menu-"] > ul.menu > li > ul > li > ul > li > a, .wraper_header.style-twelve .nav > [class*="menu-"] > ul.menu > li > ul > li > ul > li > ul > li > a, .wraper_header.style-twelve .nav > [class*="menu-"] > ul.menu > li > ul > li > ul > li > ul > li ul li a{font-family:Rubik;text-align:left;text-transform:uppercase;line-height:25px;font-weight:400;font-style:normal;color:#454545;font-size:13px;}.wraper_header.style-twelve .header_main_action ul > li.header-cart-bar i{color:#FFFFFF;}.wraper_header.style-twelve .header_main_action ul > li.floating-searchbar i{color:#FFFFFF;}.wraper_header.style-twelve .header_main .responsive-nav i{color:#FFFFFF;}body[data-header-style="header-style-twelve"] #mobile-menu{background-color:#ffffff;}body[data-header-style="header-style-twelve"] .mobile-menu-nav{font-family:Poppins;text-transform:uppercase;line-height:27px;letter-spacing:0.5px;font-weight:400;font-style:normal;color:#838383;font-size:13px;}body[data-header-style="header-style-twelve"] .mobile-menu-close i{color:#838383;}.wraper_inner_banner{background-position:center bottom;background-image:url('https://www.berecsarl.com/wp-content/uploads/2018/07/inner-banner-1.jpg');background-size:cover;}.wraper_inner_banner_main{border-bottom-color:rgba(255,255,255,0.01);}.wraper_inner_banner_main > .container{padding-top:63px;padding-bottom:0px;}.inner_banner_main .title{font-family:Poppins;line-height:40px;letter-spacing:-1px;font-weight:800;font-style:normal;color:#1a1a1a;font-size:36px;}.inner_banner_main .subtitle{font-family:Rubik;line-height:28px;font-weight:400;font-style:normal;color:#0c121f;font-size:18px;}.inner_banner_breadcrumb #crumbs{font-family:Rubik;line-height:26px;font-weight:400;font-style:normal;color:#323232;font-size:14px;}.wraper_inner_banner_breadcrumb > .container{padding-top:10px;padding-bottom:68px;}.wraper_footer.style-one{background-color:#161616;}.wraper_footer.style-one .wraper_footer_main{border-bottom-color:rgba(255,255,255,0.01);}.wraper_footer.style-two{background-color:#161616;}.wraper_footer.style-two .wraper_footer_main{border-bottom-color:rgba(255,255,255,0.01);}.wraper_footer.style-three{background-color:#161616;}.wraper_footer.style-three .wraper_footer_main{border-bottom-color:rgba(255,255,255,0.01);}.wraper_footer.style-four{background-color:#161616;}.wraper_footer.style-four .wraper_footer_navigation{background-color:rgba(0,23,77,0.01);}.wraper_footer.style-four .wraper_footer_main{border-bottom-color:rgba(255,255,255,0.01);}.wraper_footer.style-five{background-color:#161616;}.wraper_footer.style-five .wraper_footer_navigation{background-color:rgba(0,23,77,0.01);}.wraper_footer.style-five .wraper_footer_main{border-bottom-color:rgba(255,255,255,0.01);}.wraper_footer.style-six{background-color:#1a2024;}.wraper_footer.style-six .wraper_footer_main{border-bottom-color:#575656;}.wraper_footer.style-seven{background-color:#f0eddc;}.wraper_footer.style-eight{background-color:#161616;}.wraper_footer.style-eight .wraper_footer_main{border-bottom-color:rgba(255,255,255,0.01);}.wraper_footer.style-nine{background-color:#161616;}.wraper_footer.style-nine .wraper_footer_navigation{background-color:rgba(0,23,77,0.01);}.wraper_footer.style-nine .wraper_footer_main{border-bottom-color:rgba(255,255,255,0.01);}.wraper_footer.style-ten{background-color:#161616;}.wraper_footer.style-ten .wraper_footer_main{border-bottom-color:rgba(255,255,255,0.01);}.wraper_footer.style-eleven{background-position:right bottom;background-image:url('https://www.berecsarl.com/wp-content/uploads/2018/10/footer.jpg');background-size:cover;}.wraper_footer.style-eleven .wraper_footer_main{border-bottom-color:rgba(255,255,255,0.3);}.radiantthemes-button > .radiantthemes-button-main, .gdpr-notice .btn, .radiant-contact-form .form-row input[type=submit], .radiant-contact-form .form-row input[type=button], .radiant-contact-form .form-row button[type=submit], .post.style-two .post-read-more .btn, .post.style-three .entry-main .post-read-more .btn, .woocommerce #respond input#submit, .woocommerce .return-to-shop .button, .woocommerce form .form-row input.button, .widget-area > .widget.widget_price_filter .button, .wraper_error_main.style-one .error_main .btn, .wraper_error_main.style-two .error_main .btn, .wraper_error_main.style-three .error_main_item .btn, .wraper_error_main.style-four .error_main .btn{padding-top:8px;padding-right:35px;padding-bottom:8px;padding-left:35px;}.radiantthemes-button.hover-style-one .radiantthemes-button-main:hover, .radiantthemes-button.hover-style-two .radiantthemes-button-main > .overlay, .radiantthemes-button.hover-style-three .radiantthemes-button-main > .overlay, .radiantthemes-button.hover-style-four .radiantthemes-button-main:hover, .gdpr-notice .btn, .radiant-contact-form .form-row input[type=submit]:hover, .radiant-contact-form .form-row input[type=button]:hover, .radiant-contact-form .form-row button[type=submit]:hover, .post.style-two .post-read-more .btn:hover, .post.style-three .entry-main .post-read-more .btn:hover, .woocommerce #respond input#submit, .woocommerce .return-to-shop .button:hover, .woocommerce form .form-row input.button:hover, .widget-area > .widget.widget_price_filter .button:hover, .wraper_error_main.style-one .error_main .btn:hover, .wraper_error_main.style-two .error_main .btn:hover, .wraper_error_main.style-three .error_main_item .btn:hover, .wraper_error_main.style-four .error_main .btn:hover{background-color:#2986e2;}.radiantthemes-button > .radiantthemes-button-main, .gdpr-notice .btn, .radiant-contact-form .form-row input[type=submit], .radiant-contact-form .form-row input[type=button], .radiant-contact-form .form-row button[type=submit], .post.style-two .post-read-more .btn, .post.style-three .entry-main .post-read-more .btn, .woocommerce #respond input#submit, .woocommerce .return-to-shop .button, .woocommerce form .form-row input.button, .widget-area > .widget.widget_price_filter .button, .wraper_error_main.style-one .error_main .btn, .wraper_error_main.style-two .error_main .btn, .wraper_error_main.style-three .error_main_item .btn, .wraper_error_main.style-four .error_main .btn{border-top:1px solid #2986e2;border-bottom:1px solid #2986e2;border-left:1px solid #2986e2;border-right:1px solid #2986e2;}.radiantthemes-button > .radiantthemes-button-main:hover, .gdpr-notice .btn:hover, .radiant-contact-form .form-row input[type=submit]:hover, .radiant-contact-form .form-row input[type=button]:hover, .radiant-contact-form .form-row button[type=submit]:hover, .post.style-two .post-read-more .btn:hover, .post.style-three .entry-main .post-read-more .btn:hover, .woocommerce #respond input#submit, .woocommerce .return-to-shop .button:hover, .woocommerce form .form-row input.button:hover, .widget-area > .widget.widget_price_filter .button:hover, .wraper_error_main.style-one .error_main .btn:hover, .wraper_error_main.style-two .error_main .btn:hover, .wraper_error_main.style-three .error_main_item .btn:hover, .wraper_error_main.style-four .error_main .btn:hover{border-top:0px solid ;border-bottom:0px solid ;border-left:0px solid ;border-right:0px solid ;}.radiantthemes-button > .radiantthemes-button-main, .gdpr-notice .btn, .radiant-contact-form .form-row input[type=submit], .radiant-contact-form .form-row input[type=button], .radiant-contact-form .form-row button[type=submit], .post.style-two .post-read-more .btn, .post.style-three .entry-main .post-read-more .btn, .woocommerce #respond input#submit, .woocommerce .return-to-shop .button, .woocommerce form .form-row input.button, .widget-area > .widget.widget_price_filter .button, .wraper_error_main.style-one .error_main .btn, .wraper_error_main.style-two .error_main .btn, .wraper_error_main.style-three .error_main_item .btn, .wraper_error_main.style-four .error_main .btn{-moz-box-shadow: 0 0 0 0 rgba(0,0,0,0.01);-webkit-box-shadow: 0 0 0 0 rgba(0,0,0,0.01);-ms-box-shadow: 0 0 0 0 rgba(0,0,0,0.01);-o-box-shadow: 0 0 0 0 rgba(0,0,0,0.01);box-shadow: 0 0 0 0 rgba(0,0,0,0.01);}.radiantthemes-button > .radiantthemes-button-main, .gdpr-notice .btn, .radiant-contact-form .form-row input[type=submit], .radiant-contact-form .form-row input[type=button], .radiant-contact-form .form-row button[type=submit], .post.style-two .post-read-more .btn, .post.style-three .entry-main .post-read-more .btn, .woocommerce #respond input#submit, .woocommerce .return-to-shop .button, .woocommerce form .form-row input.button, .widget-area > .widget.widget_price_filter .button, .wraper_error_main.style-one .error_main .btn, .wraper_error_main.style-two .error_main .btn, .wraper_error_main.style-three .error_main_item .btn, .wraper_error_main.style-four .error_main .btn{font-family:Rubik;text-transform:capitalize;line-height:23px;font-weight:400;font-style:normal;color:#fff;font-size:14px;}.radiantthemes-button > .radiantthemes-button-main:hover, .gdpr-notice .btn:hover, .radiant-contact-form .form-row input[type=submit]:hover, .radiant-contact-form .form-row input[type=button]:hover, .radiant-contact-form .form-row button[type=submit]:hover, .post.style-two .post-read-more .btn:hover, .post.style-three .entry-main .post-read-more .btn:hover, .woocommerce #respond input#submit, .woocommerce .return-to-shop .button:hover, .woocommerce form .form-row input.button:hover, .widget-area > .widget.widget_price_filter .button:hover, .wraper_error_main.style-one .error_main .btn:hover, .wraper_error_main.style-two .error_main .btn:hover, .wraper_error_main.style-three .error_main_item .btn:hover, .wraper_error_main.style-four .error_main .btn:hover{color:#ffffff;}.radiantthemes-button > .radiantthemes-button-main i{color:#ffffff;}.radiantthemes-button > .radiantthemes-button-main:hover i{color:#ffffff;}.radiant-contact-form .form-row, div.wpcf7-response-output{margin-right:5px;margin-bottom:24px;margin-left:5px;}.radiant-contact-form .form-row input[type=text], .radiant-contact-form .form-row input[type=email], .radiant-contact-form .form-row input[type=url], .radiant-contact-form .form-row input[type=tel], .radiant-contact-form .form-row input[type=number], .radiant-contact-form .form-row input[type=password], .radiant-contact-form .form-row input[type=date], .radiant-contact-form .form-row input[type=time], .radiant-contact-form .form-row select{height:45px;}.radiant-contact-form .form-row textarea{height:125px;}.radiant-contact-form .form-row input[type=text]:focus, .radiant-contact-form .form-row input[type=email]:focus, .radiant-contact-form .form-row input[type=url]:focus, .radiant-contact-form .form-row input[type=tel]:focus, .radiant-contact-form .form-row input[type=number]:focus, .radiant-contact-form .form-row input[type=password]:focus, .radiant-contact-form .form-row input[type=date]:focus, .radiant-contact-form .form-row input[type=time]:focus, .radiant-contact-form .form-row select:focus, .radiant-contact-form .form-row textarea:focus{padding-top:0px;padding-right:0px;padding-bottom:0px;padding-left:0px;}.radiant-contact-form .form-row input[type=text], .radiant-contact-form .form-row input[type=email], .radiant-contact-form .form-row input[type=url], .radiant-contact-form .form-row input[type=tel], .radiant-contact-form .form-row input[type=number], .radiant-contact-form .form-row input[type=password], .radiant-contact-form .form-row input[type=date], .radiant-contact-form .form-row input[type=time], .radiant-contact-form .form-row select, .radiant-contact-form .form-row textarea{-moz-box-shadow: 0 0 0 0 rgba(0,0,0,0.1);-webkit-box-shadow: 0 0 0 0 rgba(0,0,0,0.1);-ms-box-shadow: 0 0 0 0 rgba(0,0,0,0.1);-o-box-shadow: 0 0 0 0 rgba(0,0,0,0.1);box-shadow: 0 0 0 0 rgba(0,0,0,0.1);}.wraper_error_main.style-one{background-color:#dedede;background-image:url('https://themes.radiantthemes.com/apex-clinic/clinic-two/wp-content/themes/apexclinic/images/404-Error-Style-One-Background-Image.png');background-size:cover;}.wraper_error_main.style-two{background-color:#ffffff;}.wraper_error_main.style-three{background-color:#ffffff;}.wraper_error_main.style-four{background-color:#ffffff;}.wraper_maintenance_main.style-one{background-color:#ffffff;background-image:url('https://themes.radiantthemes.com/apex-clinic/clinic-two/wp-content/themes/apexclinic/images/Maintenance-More-Style-One-Image.png');}.wraper_maintenance_main.style-two{background-color:#ffffff;background-image:url('https://themes.radiantthemes.com/apex-clinic/clinic-two/wp-content/themes/apexclinic/images/Maintenance-More-Style-Two-Image.png');}.wraper_maintenance_main.style-three{background-color:#ffffff;background-image:url('https://themes.radiantthemes.com/apex-clinic/clinic-two/wp-content/themes/apexclinic/images/Maintenance-More-Style-Three-Image.png');}.wraper_comingsoon_main.style-one{background-color:#000000;background-image:url('https://themes.radiantthemes.com/apex-clinic/clinic-two/wp-content/themes/apexclinic/images/Coming-Soon-Style-One-Background-Image.png');background-size:cover;}.wraper_comingsoon_main.style-two{background-color:#000000;background-image:url('https://themes.radiantthemes.com/apex-clinic/clinic-two/wp-content/themes/apexclinic/images/Coming-Soon-Style-Two-Background-Image.png');background-size:cover;}.wraper_comingsoon_main.style-three{background-color:#000000;background-image:url('https://themes.radiantthemes.com/apex-clinic/clinic-two/wp-content/themes/apexclinic/images/Coming-Soon-Style-Three-Background-Image.png');background-size:cover;}</style><style type="text/css" data-type="vc_shortcodes-custom-css">.vc_custom_1533879097040{margin-top: 0px !important;margin-bottom: 0px !important;padding-top: 70px !important;padding-bottom: 50px !important;}.vc_custom_1533879065137{margin-top: 0px !important;margin-bottom: 0px !important;padding-top: 0px !important;padding-bottom: 0px !important;}.vc_custom_1533879931421{margin-top: 0px !important;margin-bottom: 0px !important;padding-top: 0px !important;padding-bottom: 40px !important;}</style><noscript><style> .wpb_animate_when_almost_visible { opacity: 1; }</style></noscript><noscript><style id="rocket-lazyload-nojs-css">.rll-youtube-player, [data-lazy-src]{display:none !important;}</style></noscript>
+
+
+
+</head>
+
+
+
+	<body data-rsssl=1  class="wp-singular page-template-default page page-id-8282 wp-embed-responsive wp-theme-apexclinic theme-apexclinic woocommerce-no-js wpb-js-composer js-comp-ver-6.7.0 vc_responsive" data-page-transition="1" data-header-style="header-style-twelve" data-nicescroll-cursorcolor="#ffbc13" data-nicescroll-cursorwidth="7px">
+
+	
+	
+	<!-- overlay -->
+	<div class="overlay"></div>
+	<!-- overlay -->
+	
+	        <!-- page-transition-layer -->
+        <div class="page-transition-layer i-am-active">
+            <svg class="page-transition-layer-spinner" width="65px" height="65px" viewBox="0 0 66 66" xmlns="http://www.w3.org/2000/svg">
+                <circle class="page-transition-layer-spinner-path" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30"></circle>
+            </svg>
+        </div>
+        <!-- page-transition-layer -->
+	
+	<!-- scrollup -->
+						<div class="scrollup right">
+					<i class="fa fa-angle-up"></i>
+		</div>
+		<!-- scrollup -->
+
+		
+	<!-- radiantthemes-website-layout -->
+	    	    	    <div class="radiantthemes-website-layout full-width">
+            
+    	
+<!-- wraper_header -->
+	<header class="wraper_header style-twelve static-header">
+	<!-- wraper_header_top -->
+	<div class="wraper_header_top">
+		<div class="container">
+			<!-- row -->
+			<div class="row header_top">
+				<div class="col-lg-3 col-md-4 col-sm-4 col-xs-12 text-left">
+					<!-- header_top_item -->
+					<div class="header_top_item">
+													<!-- brand-logo -->
+							<div class="brand-logo">
+								<a href="https://www.berecsarl.com/"><img width="85" height="69" src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2085%2069'%3E%3C/svg%3E" alt="" data-lazy-src="https://www.berecsarl.com/wp-content/uploads/2020/03/MENU-LOGO-2.jpg"><noscript><img width="85" height="69" src="https://www.berecsarl.com/wp-content/uploads/2020/03/MENU-LOGO-2.jpg" alt=""></noscript></a>
+							</div>
+							<!-- brand-logo -->
+											</div>
+					<!-- header_top_item -->
+				</div>
+				<div class="col-lg-9 col-md-8 col-sm-8 col-xs-12 text-right hidden-xs">
+					<!-- header_top_item -->
+					<div class="header_top_item">
+						<!-- contact -->
+						<ul class="contact">
+															<li class="phone">berecmedical@yahoo.fr <strong>(+229) 66633535 / 21330915</strong></li>
+																						<li class="address hidden-sm">
+									<div class="has-icon">
+										<div class="icon"><i class="fa fa-map-marker"></i></div>
+										C/343 – quartier Ayélawadjè – Akpakpa<br> Cotonou - Bénin									</div>
+								</li>
+																						<li class="timing hidden-sm">
+									<div class="has-icon">
+										<div class="icon"><i class="fa fa-clock-o"></i></div>
+										Lun - Vend - 8:00 - 18:00 <br> Sam : sur RDV									</div>
+								</li>
+													</ul>
+						<!-- contact -->
+					</div>
+					<!-- header_top_item -->
+				</div>
+			</div>
+			<!-- row -->
+		</div>
+	</div>
+	<!-- wraper_header_top -->
+	<!-- wraper_header_main -->
+	<!-- wraper_header_main -->
+			<div class="wraper_header_main i-am-sticky">
+			<div class="container">
+			<!-- header_main -->
+			<div class="header_main">
+				<!-- nav -->
+				<nav class="nav visible-lg visible-md hidden-sm hidden-xs">
+					<div class="menu-header-menu-container"><ul id="menu-header-menu" class="menu"><li id="menu-item-7861" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-home menu-item-7861"><a href="https://www.berecsarl.com/" title="						">Accueil</a></li>
+<li id="menu-item-8353" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-8353"><a href="https://www.berecsarl.com/a-propos/" title="						">A Propos</a></li>
+<li id="menu-item-8040" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-8040"><a href="https://www.berecsarl.com/categories-de-produits/" title="						">Catégories de produits</a></li>
+<li id="menu-item-8634" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-8634"><a href="https://www.berecsarl.com/produits/">Produits</a></li>
+<li id="menu-item-8777" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-8777"><a href="https://www.berecsarl.com/actualites-realisations/">Actualités / Réalisations</a></li>
+<li id="menu-item-8737" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-8737"><a href="https://www.berecsarl.com/contacts/">Contacts</a></li>
+</ul></div>				</nav>
+				<!-- nav -->
+									<!-- responsive-nav -->
+					<div class="responsive-nav hidden-lg hidden-md visible-sm visible-xs">
+						<i class="fa fa-bars"></i>
+					</div>
+					<!-- responsive-nav -->
+								<!-- header_main_action -->
+				<div class="header_main_action">
+					<ul>
+																											<li class="floating-searchbar">
+									<i class="fa fa-search"></i>
+									<i class="fa fa-times"></i>
+									<!-- floating-search-bar -->
+									<div class="floating-search-bar">
+										<form role="search" method="get" class="search-form" action="https://www.berecsarl.com/">
+										<div class="form-row">
+											<input type="search" placeholder="Search..." value="" name="s" required>
+											<button type="submit"><i class="fa fa-search"></i></button>
+										</div>
+										</form>
+									</div>
+									<!-- floating-search-bar -->
+								</li>
+																								</ul>
+				</div>
+				<!-- header_main_action -->
+				<div class="clearfix"></div>
+			</div>
+			<!-- header_main -->
+		</div>
+	</div>
+	<!-- wraper_header_main -->
+</header>
+<!-- wraper_header -->
+
+	<!-- mobile-menu -->
+	<div class="mobile-menu hidden">
+		<!-- mobile-menu-main -->
+		<div class="mobile-menu-main">
+			<!-- mobile-menu-close -->
+			<div class="mobile-menu-close">
+				<i class="fa fa-times"></i>
+			</div>
+			<!-- mobile-menu-close -->
+			<!-- mobile-menu-nav -->
+			<nav class="mobile-menu-nav">
+				<div class="menu-header-menu-container"><ul id="menu-header-menu-1" class="menu"><li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-home menu-item-7861"><a href="https://www.berecsarl.com/" title="						">Accueil</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-8353"><a href="https://www.berecsarl.com/a-propos/" title="						">A Propos</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-8040"><a href="https://www.berecsarl.com/categories-de-produits/" title="						">Catégories de produits</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-8634"><a href="https://www.berecsarl.com/produits/">Produits</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-8777"><a href="https://www.berecsarl.com/actualites-realisations/">Actualités / Réalisations</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-8737"><a href="https://www.berecsarl.com/contacts/">Contacts</a></li>
+</ul></div>			</nav>
+			<!-- mobile-menu-nav -->
+		</div>
+		<!-- mobile-menu-main -->
+	</div>
+	<!-- mobile-menu -->
+
+	    
+		<!-- hamburger-menu-holder -->
+		<div class="hamburger-menu-holder hidden">
+			<!-- hamburger-menu -->
+			<div class="hamburger-menu">
+				<!-- hamburger-menu-close -->
+				<div class="hamburger-menu-close">
+					<div class="hamburger-menu-close-lines"><span></span><span></span></div>
+				</div>
+				<!-- hamburger-menu-close -->
+				<!-- hamburger-menu-main -->
+				<div class="row hamburger-menu-main">
+					<div id="archives-2" class="col-lg-12 col-md-12 col-sm-12 col-xs-12 matchHeight widget widget_archive"><p class="widget-title">Archives</p>
+			<ul>
+					<li><a href='https://www.berecsarl.com/2022/01/'>janvier 2022</a></li>
+	<li><a href='https://www.berecsarl.com/2021/12/'>décembre 2021</a></li>
+	<li><a href='https://www.berecsarl.com/2021/09/'>septembre 2021</a></li>
+	<li><a href='https://www.berecsarl.com/2021/08/'>août 2021</a></li>
+	<li><a href='https://www.berecsarl.com/2021/07/'>juillet 2021</a></li>
+	<li><a href='https://www.berecsarl.com/2018/06/'>juin 2018</a></li>
+	<li><a href='https://www.berecsarl.com/2018/05/'>mai 2018</a></li>
+			</ul>
+
+			</div><div id="categories-2" class="col-lg-12 col-md-12 col-sm-12 col-xs-12 matchHeight widget widget_categories"><p class="widget-title">Catégories</p>
+			<ul>
+					<li class="cat-item cat-item-84"><a href="https://www.berecsarl.com/category/actualites/">Actualités</a>
+</li>
+	<li class="cat-item cat-item-79"><a href="https://www.berecsarl.com/category/cardiologie/">Cardiologie</a>
+</li>
+	<li class="cat-item cat-item-78"><a href="https://www.berecsarl.com/category/drager/">Drager</a>
+</li>
+	<li class="cat-item cat-item-80"><a href="https://www.berecsarl.com/category/schiller/">SCHILLER</a>
+</li>
+	<li class="cat-item cat-item-1"><a href="https://www.berecsarl.com/category/uncategorized/">Uncategorized</a>
+</li>
+			</ul>
+
+			</div><div id="meta-2" class="col-lg-12 col-md-12 col-sm-12 col-xs-12 matchHeight widget widget_meta"><p class="widget-title">Méta</p>
+		<ul>
+						<li><a href="https://www.berecsarl.com/wp-login.php">Connexion</a></li>
+			<li><a href="https://www.berecsarl.com/feed/">Flux des publications</a></li>
+			<li><a href="https://www.berecsarl.com/comments/feed/">Flux des commentaires</a></li>
+
+			<li><a href="https://fr.wordpress.org/">Site de WordPress-FR</a></li>
+		</ul>
+
+		</div><div id="media_image-2" class="col-lg-12 col-md-12 col-sm-12 col-xs-12 matchHeight widget widget_media_image"><img width="236" height="62" src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20236%2062'%3E%3C/svg%3E" class="image wp-image-8314  attachment-full size-full" alt="" style="max-width: 100%; height: auto;" decoding="async" data-lazy-src="https://www.berecsarl.com/wp-content/uploads/2018/10/logo.png" /><noscript><img width="236" height="62" src="https://www.berecsarl.com/wp-content/uploads/2018/10/logo.png" class="image wp-image-8314  attachment-full size-full" alt="" style="max-width: 100%; height: auto;" decoding="async" /></noscript></div><div id="text-4" class="col-lg-12 col-md-12 col-sm-12 col-xs-12 matchHeight widget widget_text">			<div class="textwidget"><p>Claritas est etiam processus dynamicus, qui sequitur mutationem consuetudium lectorum eleifend option congue nihil imperdiet doming.</p>
+</div>
+		</div>				</div>
+				<!-- hamburger-menu-main -->
+			</div>
+			<!-- hamburger-menu -->
+		</div>
+		<!-- hamburger-menu-holder -->
+    
+    		    				<!-- wraper_header_bannerinner -->
+							<div class="wraper_inner_banner">
+								<!-- wraper_inner_banner_main -->
+			<div class="wraper_inner_banner_main">
+				<div class="container">
+					<!-- row -->
+					<div class="row">
+						<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+							<!-- inner_banner_main -->
+							<div class="inner_banner_main">
+																										<p class="title">
+										Book an Appointment									</p>
+																																	</div>
+							<!-- inner_banner_main -->
+						</div>
+					</div>
+					<!-- row -->
+				</div>
+			</div>
+			<!-- wraper_inner_banner_main -->
+									<!-- wraper_inner_banner_breadcrumb -->
+			<div class="wraper_inner_banner_breadcrumb">
+				<div class="container">
+					<!-- row -->
+					<div class="row">
+						<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+							<!-- inner_banner_breadcrumb -->
+							<div class="inner_banner_breadcrumb">
+								<div id="crumbs"><a href="https://www.berecsarl.com">Home</a> <span class="gap"><i class="el el-chevron-right"></i></span> <span class="current">Book an Appointment</span></div>							</div>
+							<!-- inner_banner_breadcrumb -->
+						</div>
+					</div>
+					<!-- row -->
+				</div>
+			</div>
+			<!-- wraper_inner_banner_breadcrumb -->
+					</div>
+		<!-- wraper_header_bannerinner -->
+<!-- wraper_header_bannerinner -->
+    
+    
+    	<!-- #page -->
+        <div id="page" class="site">
+    		<!-- #content -->
+    		<div id="content" class="site-content">
+
+    <div id="primary" class="content-area">
+    	<main id="main" class="site-main">
+    		    			<div class="container page-container">
+    				
+<article id="post-8282" class="post-8282 page type-page status-publish hentry">
+	<header class="entry-header">
+	    	</header><!-- .entry-header -->
+	<div class="entry-content">
+		<div class="vc_row wpb_row vc_row-fluid vc_custom_1533879097040"><div class="wpb_column vc_column_container vc_col-sm-12"><div class="vc_column-inner vc_custom_1533879065137"><div class="wpb_wrapper"><h3 style="font-size: 40px;color: #2d2d2d;line-height: 50px;text-align: center" class="vc_custom_heading vc_custom_1533879931421" >Make an Appointment</h3>
+	<div class="wpb_text_column wpb_content_element " >
+		<div class="wpb_wrapper">
+			<script type="rocketlazyloadscript">var ea_settings = {"trans.service":"Service","trans.location":"Location","trans.worker":"Worker","trans.service_option":"Select Service","trans.location_option":"Select Location","trans.worker_option":"Select Worker","trans.customer_search_label":"Search Customer","trans.done_message":"Done","trans.submit_button_text":"Submit","time_format":"h:mm a","trans.currency":"$","price.hide":"0","price.hide.service":"0","hide.decimal_in_price":"0","datepicker":"en-US","form.label.above":"0","show.iagree":"0","show.display_thankyou_note":"0","show.customer_search_front":"0","customer_search_password_only":"0","delete_data_on_uninstall":"0","customer_search_roles":"[]","cancel.scroll":"calendar","compatibility.mode":"0","css.off":"0","submit.redirect":"","advance.redirect":"[]","advance_cancel.redirect":"[]","block.time":"0","cancel_time":"0","max.appointments":"5","pre.reservation":"0","currency.before":"0","gdpr.on":"0","gdpr.label":"By using this form you agree with the storage and handling of your data by this website.","gdpr.link":"","gdpr.message":"You need to accept the privacy checkbox","sort.workers-by":"id","sort.services-by":"id","sort.locations-by":"id","order.workers-by":"DESC","order.services-by":"DESC","order.locations-by":"DESC","captcha.site-key":"","captcha3.site-key":"","label.from_to":"0","is_multiple_booking_allowed":"0","webhook.endpoints":"[]","pending_message":"Your appointment has been submitted and is currently pending approval. You will be notified once it is confirmed.","confirmed_message":"Your appointment has been confirmed. Thank you!","reservation_message":"Your appointment has been reserved. You will be notified once it is confirmed.","trans.confirmation-title":"Thank You for Booking!","check":"8b68941874","width":"800px","scroll_off":"true","layout_cols":"1","start_of_week":"1","rtl":"0","default_date":"2026-08-11","min_date":null,"max_date":null,"show_remaining_slots":"0","show_week":"0","save_form_content":true,"cal_auto_select":"1","auto_select_slot":"0","auto_select_option":"0","block_days":null,"block_days_tooltip":"","trans.please-select-new-date":"Choisissez un autre jour","trans.personal-informations":"Coordonn\u00e9es","trans.field-required":"Ce champ est obligatoire.","trans.error-email":"Veuillez saisir une adresse e-mail valide","trans.error-name":"Saisissez au moins 3 lettres.","trans.error-phone":"Saisissez au moins 3 chiffres.","trans.fields":"* champs obligatoires","trans.email":"E-mail","trans.name":"Nom","trans.phone":"T\u00e9l\u00e9phone","trans.comment":"Message","trans.overview-message":"V\u00e9rifier votre rendez-vous ci-apr\u00e8s et confirmez :","trans.booking-overview":"R\u00e9capitulatif","trans.date-time":"Date et horaire","trans.submit":"Envoyer","trans.cancel":"Annuler","trans.price":"Prix","trans.iagree":"J'accepte les conditions g\u00e9n\u00e9rales","trans.field-iagree":"Vous devez accepter les conditions g\u00e9n\u00e9rales","trans.slot-not-selectable":"Vous ne pouvez pas s\u00e9lectionner ce cr\u00e9neau horaire !","trans.nonce-expired":"Code de validation du formulaire expir\u00e9. Merci de rafra\u00eechir la page pour continuer.","trans.internal-error":"Erreur interne ! Veuillez r\u00e9-essayer.","trans.ajax-call-not-available":"Impossible d'accomplir la requ\u00eate ajax. Merci de r\u00e9-essayer plus tard.","date_format":"MMMM D, YYYY","default_datetime_format":"YYYY-MM-DD HH:mm","field_order":"service_first","MetaFields":[{"id":"1","type":"INPUT","slug":"email","label":"EMail","mixed":"","default_value":"","visible":"1","required":"1","validation":"email","position":"1"},{"id":"2","type":"INPUT","slug":"name","label":"Nom","mixed":"","default_value":"","visible":"1","required":"1","validation":"minlength-3","position":"2"},{"id":"3","type":"INPUT","slug":"phone","label":"T\u00e9l\u00e9phone","mixed":"","default_value":"","visible":"1","required":"1","validation":"minlength-3","position":"3"},{"id":"4","type":"TEXTAREA","slug":"description","label":"Description","mixed":"","default_value":"","visible":"1","required":"0","validation":null,"position":"4"}],"ea_new_ui":"0","default.status":"pending","default_status_message":"Your appointment has been submitted and is currently pending approval. You will be notified once it is confirmed.","is_user_logged_in":0,"allow_customer_search":0};</script><script type="rocketlazyloadscript">var ea_vacations = [];</script><script type="rocketlazyloadscript">var ea_connections = [];</script><script type="rocketlazyloadscript">var ea_service_start_data = [];</script><style></style><script type="rocketlazyloadscript" data-rocket-type="text/javascript">
+    var ea_ajaxurl = 'https://www.berecsarl.com/wp-admin/admin-ajax.php';
+</script>
+<script type="text/template" id="ea-bootstrap-main">
+    <div class="ea-bootstrap <%- settings.form_class %>" translate="no" style="max-width: <%- settings.width %>;">
+        <form class="form-horizontal">
+            <% if (settings.layout_cols === '2') { %>
+            <div class="col-md-6" style="padding-top: 25px;">
+                <% } %>
+                <!-- LOCATION -->
+                <div class="step form-group">
+                    <div class="block"></div>
+                    <label for="location" class="ea-label col-sm-4 control-label">
+                        Location                    </label>
+                    <div class="col-sm-8">
+                        <select id="location" name="location" data-c="location" class="filter form-control">
+                            <option value="" selected="selected">Select Location</option>                        </select>
+                    </div>
+                </div>
+                <% if (settings['field_order'] == 'worker_first') { %>
+                    
+                    <!-- WORKER FIRST -->
+                    <div class="step form-group">
+                        <div class="block"></div>
+                        <label for="worker" class="ea-label col-sm-4 control-label">
+                            Worker                        </label>
+                        <div class="col-sm-8">
+                            <select id="worker" name="worker" data-c="worker" class="filter form-control">
+                                <option value="" selected="selected">Select Worker</option>                            </select>
+                        </div>
+                    </div>
+
+                    <!-- SERVICE SECOND -->
+                    <div class="step form-group">
+                        <div class="block"></div>
+                        <label for="service" class="ea-label col-sm-4 control-label">
+                            Service                        </label>
+                        <div class="col-sm-8">
+                            <select id="service" name="service" data-c="service" class="filter form-control"
+                                    data-currency="$">
+                                <option value="" selected="selected">Select Service</option>                            </select>
+                        </div>
+                    </div>
+
+                <% } else { %>
+
+                
+
+                    <!-- DEFAULT (SERVICE FIRST) -->
+                    <div class="step form-group">
+                        <div class="block"></div>
+                        <label for="service" class="ea-label col-sm-4 control-label">
+                            Service                        </label>
+                        <div class="col-sm-8">
+                            <select id="service" name="service" data-c="service" class="filter form-control"
+                                    data-currency="$">
+                                <option value="" selected="selected">Select Service</option>                            </select>
+                        </div>
+                    </div>
+
+                    <div class="step form-group">
+                        <div class="block"></div>
+                        <label for="worker" class="ea-label col-sm-4 control-label">
+                            Worker                        </label>
+                        <div class="col-sm-8">
+                            <select id="worker" name="worker" data-c="worker" class="filter form-control">
+                                <option value="" selected="selected">Select Worker</option>                            </select>
+                        </div>
+                    </div>
+
+                <% } %>
+                
+                <div class="form-group">
+                    <div class="col-sm-4"></div>
+                    <div class="col-sm-8">
+                        <div id="ea-service-description" class="ea-service-description"></div>
+                    </div>
+                </div>
+                <div class="step calendar" class="filter">
+                    <div class="block"></div>
+                    <div class="date"></div>
+                </div>
+                <div class="step" class="filter">
+                    <div class="block"></div>
+                    <div class="time"></div>
+                </div>
+                <% if (settings.layout_cols === '2') { %>
+            </div>
+            <div class="step final col-md-6">
+                <% } else { %>
+                <div class="step final">
+                    <% } %>
+                    <div class="ea_hide_show">
+                    <div class="block"></div>
+                    <h3><%- settings['trans.personal-informations'] %></h3>
+                    <small><%- settings['trans.fields'] %></small>
+                    <% if (settings['allow_customer_search'] == 1) { %>
+                            <div class="form-group">
+                                <label for="ea_customer_search" class="col-sm-4 control-label">Search Customer</label>
+                                <div class="col-sm-8">
+                                    <input id="ea_customer_search" class="form-control" type="text" placeholder="Search Customer" />
+                                </div>
+                            </div>
+                        
+                    <% } %>
+                    <% _.each(settings.MetaFields, function(item,key,list) { %>
+                    <% if (item.visible == "0") { return; } %>
+                    <% if (item.visible == "2") { %>
+                    <input id="<%- item.slug %>" name="<%- item.slug %>" type="hidden" value="<%- item.default_value %>" class="custom-field" />
+                    <% return; } %>
+                    <div class="form-group">
+                        <label for="<%- item.slug %>" class="col-sm-4 control-label"><%= item.label %> <% if (item.required == "1") { %>*<% } %></label>
+                        <div class="col-sm-8">
+                            <!-- INPUT TYPE -->
+                            <% if(item.type === 'INPUT') { %>
+                            <input id="<%- item.slug %>"  class="form-control custom-field" maxlength="499" type="text" name="<%- item.slug %>" placeholder="<%- item.mixed %>" value="<%- item.default_value %>" <% if (item.required == "1") { %>data-rule-required="true" data-msg-required="<%- settings['trans.field-required'] %>"<% } %> <% if (item.validation == "email") { %>data-rule-email="true" data-msg-email="<%- settings['trans.error-email'] %>"<% } %>>
+                            <!-- INPUT MASKED -->
+                            <% } else if(item.type === 'MASKED') { %>
+                            <input id="<%- item.slug %>" class="form-control custom-field masked-field" <% if (item.required == "1") { %>data-rule-required="true" data-msg-required="<%- settings['trans.field-required'] %>"<% } %> type="text" name="<%- item.slug %>" placeholder="<%- item.mixed %>" data-inputmask="'mask':'<%- item.default_value %>'" />
+                            <!-- PHONE TYPE -->
+                            <% } else if(item.type === 'PHONE') { %>
+                                <div class="ea-phone-field-group">
+
+    <select name="ea-phone-country-code-part" data-default="<%- item.default_value %>" class="ea-phone-country-code-part custom-field dummy form-control" <% if (item.required == "1") { %>data-rule-required="true" data-msg-required="<%- settings['trans.field-required'] %>"<% } %>>
+        <option value="">-</option>
+<option data-countryCode="DZ" value="213">Algeria (+213)</option>
+<option data-countryCode="AD" value="376">Andorra (+376)</option>
+<option data-countryCode="AO" value="244">Angola (+244)</option>
+<option data-countryCode="AI" value="1264">Anguilla (+1264)</option>
+<option data-countryCode="AG" value="1268">Antigua &amp; Barbuda (+1268)</option>
+<option data-countryCode="AR" value="54">Argentina (+54)</option>
+<option data-countryCode="AM" value="374">Armenia (+374)</option>
+<option data-countryCode="AW" value="297">Aruba (+297)</option>
+<option data-countryCode="AU" value="61">Australia (+61)</option>
+<option data-countryCode="AT" value="43">Austria (+43)</option>
+<option data-countryCode="AZ" value="994">Azerbaijan (+994)</option>
+<option data-countryCode="BS" value="1242">Bahamas (+1242)</option>
+<option data-countryCode="BH" value="973">Bahrain (+973)</option>
+<option data-countryCode="BD" value="880">Bangladesh (+880)</option>
+<option data-countryCode="BB" value="1246">Barbados (+1246)</option>
+<option data-countryCode="BY" value="375">Belarus (+375)</option>
+<option data-countryCode="BE" value="32">Belgium (+32)</option>
+<option data-countryCode="BZ" value="501">Belize (+501)</option>
+<option data-countryCode="BJ" value="229">Benin (+229)</option>
+<option data-countryCode="BM" value="1441">Bermuda (+1441)</option>
+<option data-countryCode="BT" value="975">Bhutan (+975)</option>
+<option data-countryCode="BO" value="591">Bolivia (+591)</option>
+<option data-countryCode="BA" value="387">Bosnia Herzegovina (+387)</option>
+<option data-countryCode="BW" value="267">Botswana (+267)</option>
+<option data-countryCode="BR" value="55">Brazil (+55)</option>
+<option data-countryCode="BN" value="673">Brunei (+673)</option>
+<option data-countryCode="BG" value="359">Bulgaria (+359)</option>
+<option data-countryCode="BF" value="226">Burkina Faso (+226)</option>
+<option data-countryCode="BI" value="257">Burundi (+257)</option>
+<option data-countryCode="KH" value="855">Cambodia (+855)</option>
+<option data-countryCode="CM" value="237">Cameroon (+237)</option>
+<option data-countryCode="CA" value="1">Canada (+1)</option>
+<option data-countryCode="CV" value="238">Cape Verde Islands (+238)</option>
+<option data-countryCode="KY" value="1345">Cayman Islands (+1345)</option>
+<option data-countryCode="CF" value="236">Central African Republic (+236)</option>
+<option data-countryCode="CL" value="56">Chile (+56)</option>
+<option data-countryCode="CN" value="86">China (+86)</option>
+<option data-countryCode="CO" value="57">Colombia (+57)</option>
+<option data-countryCode="KM" value="269">Comoros (+269)</option>
+<option data-countryCode="CG" value="242">Congo (+242)</option>
+<option data-countryCode="CK" value="682">Cook Islands (+682)</option>
+<option data-countryCode="CR" value="506">Costa Rica (+506)</option>
+<option data-countryCode="HR" value="385">Croatia (+385)</option>
+<option data-countryCode="CU" value="53">Cuba (+53)</option>
+<option data-countryCode="CY" value="90392">Cyprus North (+90392)</option>
+<option data-countryCode="CY" value="357">Cyprus South (+357)</option>
+<option data-countryCode="CZ" value="42">Czech Republic (+42)</option>
+<option data-countryCode="DK" value="45">Denmark (+45)</option>
+<option data-countryCode="DJ" value="253">Djibouti (+253)</option>
+<option data-countryCode="DM" value="1809">Dominica (+1809)</option>
+<option data-countryCode="DO" value="1809">Dominican Republic (+1809)</option>
+<option data-countryCode="EC" value="593">Ecuador (+593)</option>
+<option data-countryCode="EG" value="20">Egypt (+20)</option>
+<option data-countryCode="SV" value="503">El Salvador (+503)</option>
+<option data-countryCode="GQ" value="240">Equatorial Guinea (+240)</option>
+<option data-countryCode="ER" value="291">Eritrea (+291)</option>
+<option data-countryCode="EE" value="372">Estonia (+372)</option>
+<option data-countryCode="ET" value="251">Ethiopia (+251)</option>
+<option data-countryCode="FK" value="500">Falkland Islands (+500)</option>
+<option data-countryCode="FO" value="298">Faroe Islands (+298)</option>
+<option data-countryCode="FJ" value="679">Fiji (+679)</option>
+<option data-countryCode="FI" value="358">Finland (+358)</option>
+<option data-countryCode="FR" value="33">France (+33)</option>
+<option data-countryCode="GF" value="594">French Guiana (+594)</option>
+<option data-countryCode="PF" value="689">French Polynesia (+689)</option>
+<option data-countryCode="GA" value="241">Gabon (+241)</option>
+<option data-countryCode="GM" value="220">Gambia (+220)</option>
+<option data-countryCode="GE" value="7880">Georgia (+7880)</option>
+<option data-countryCode="DE" value="49">Germany (+49)</option>
+<option data-countryCode="GH" value="233">Ghana (+233)</option>
+<option data-countryCode="GI" value="350">Gibraltar (+350)</option>
+<option data-countryCode="GR" value="30">Greece (+30)</option>
+<option data-countryCode="GL" value="299">Greenland (+299)</option>
+<option data-countryCode="GD" value="1473">Grenada (+1473)</option>
+<option data-countryCode="GP" value="590">Guadeloupe (+590)</option>
+<option data-countryCode="GU" value="671">Guam (+671)</option>
+<option data-countryCode="GT" value="502">Guatemala (+502)</option>
+<option data-countryCode="GN" value="224">Guinea (+224)</option>
+<option data-countryCode="GW" value="245">Guinea - Bissau (+245)</option>
+<option data-countryCode="GY" value="592">Guyana (+592)</option>
+<option data-countryCode="HT" value="509">Haiti (+509)</option>
+<option data-countryCode="HN" value="504">Honduras (+504)</option>
+<option data-countryCode="HK" value="852">Hong Kong (+852)</option>
+<option data-countryCode="HU" value="36">Hungary (+36)</option>
+<option data-countryCode="IS" value="354">Iceland (+354)</option>
+<option data-countryCode="IN" value="91">India (+91)</option>
+<option data-countryCode="ID" value="62">Indonesia (+62)</option>
+<option data-countryCode="IR" value="98">Iran (+98)</option>
+<option data-countryCode="IQ" value="964">Iraq (+964)</option>
+<option data-countryCode="IE" value="353">Ireland (+353)</option>
+<option data-countryCode="IL" value="972">Israel (+972)</option>
+<option data-countryCode="IT" value="39">Italy (+39)</option>
+<option data-countryCode="JM" value="1876">Jamaica (+1876)</option>
+<option data-countryCode="JP" value="81">Japan (+81)</option>
+<option data-countryCode="JO" value="962">Jordan (+962)</option>
+<option data-countryCode="KZ" value="7">Kazakhstan (+7)</option>
+<option data-countryCode="KE" value="254">Kenya (+254)</option>
+<option data-countryCode="KI" value="686">Kiribati (+686)</option>
+<option data-countryCode="KP" value="850">Korea North (+850)</option>
+<option data-countryCode="KR" value="82">Korea South (+82)</option>
+<option data-countryCode="KW" value="965">Kuwait (+965)</option>
+<option data-countryCode="KG" value="996">Kyrgyzstan (+996)</option>
+<option data-countryCode="LA" value="856">Laos (+856)</option>
+<option data-countryCode="LV" value="371">Latvia (+371)</option>
+<option data-countryCode="LB" value="961">Lebanon (+961)</option>
+<option data-countryCode="LS" value="266">Lesotho (+266)</option>
+<option data-countryCode="LR" value="231">Liberia (+231)</option>
+<option data-countryCode="LY" value="218">Libya (+218)</option>
+<option data-countryCode="LI" value="417">Liechtenstein (+417)</option>
+<option data-countryCode="LT" value="370">Lithuania (+370)</option>
+<option data-countryCode="LU" value="352">Luxembourg (+352)</option>
+<option data-countryCode="MO" value="853">Macao (+853)</option>
+<option data-countryCode="MK" value="389">Macedonia (+389)</option>
+<option data-countryCode="MG" value="261">Madagascar (+261)</option>
+<option data-countryCode="MW" value="265">Malawi (+265)</option>
+<option data-countryCode="MY" value="60">Malaysia (+60)</option>
+<option data-countryCode="MV" value="960">Maldives (+960)</option>
+<option data-countryCode="ML" value="223">Mali (+223)</option>
+<option data-countryCode="MT" value="356">Malta (+356)</option>
+<option data-countryCode="MH" value="692">Marshall Islands (+692)</option>
+<option data-countryCode="MQ" value="596">Martinique (+596)</option>
+<option data-countryCode="MR" value="222">Mauritania (+222)</option>
+<option data-countryCode="YT" value="269">Mayotte (+269)</option>
+<option data-countryCode="MX" value="52">Mexico (+52)</option>
+<option data-countryCode="FM" value="691">Micronesia (+691)</option>
+<option data-countryCode="MD" value="373">Moldova (+373)</option>
+<option data-countryCode="MC" value="377">Monaco (+377)</option>
+<option data-countryCode="MN" value="976">Mongolia (+976)</option>
+<option data-countryCode="MS" value="1664">Montserrat (+1664)</option>
+<option data-countryCode="MA" value="212">Morocco (+212)</option>
+<option data-countryCode="MZ" value="258">Mozambique (+258)</option>
+<option data-countryCode="MN" value="95">Myanmar (+95)</option>
+<option data-countryCode="NA" value="264">Namibia (+264)</option>
+<option data-countryCode="NR" value="674">Nauru (+674)</option>
+<option data-countryCode="NP" value="977">Nepal (+977)</option>
+<option data-countryCode="NL" value="31">Netherlands (+31)</option>
+<option data-countryCode="NC" value="687">New Caledonia (+687)</option>
+<option data-countryCode="NZ" value="64">New Zealand (+64)</option>
+<option data-countryCode="NI" value="505">Nicaragua (+505)</option>
+<option data-countryCode="NE" value="227">Niger (+227)</option>
+<option data-countryCode="NG" value="234">Nigeria (+234)</option>
+<option data-countryCode="NU" value="683">Niue (+683)</option>
+<option data-countryCode="NF" value="672">Norfolk Islands (+672)</option>
+<option data-countryCode="NP" value="670">Northern Marianas (+670)</option>
+<option data-countryCode="NO" value="47">Norway (+47)</option>
+<option data-countryCode="OM" value="968">Oman (+968)</option>
+<option data-countryCode="PW" value="680">Palau (+680)</option>
+<option data-countryCode="PA" value="507">Panama (+507)</option>
+<option data-countryCode="PG" value="675">Papua New Guinea (+675)</option>
+<option data-countryCode="PY" value="595">Paraguay (+595)</option>
+<option data-countryCode="PE" value="51">Peru (+51)</option>
+<option data-countryCode="PH" value="63">Philippines (+63)</option>
+<option data-countryCode="PL" value="48">Poland (+48)</option>
+<option data-countryCode="PT" value="351">Portugal (+351)</option>
+<option data-countryCode="PR" value="1787">Puerto Rico (+1787)</option>
+<option data-countryCode="QA" value="974">Qatar (+974)</option>
+<option data-countryCode="RE" value="262">Reunion (+262)</option>
+<option data-countryCode="RO" value="40">Romania (+40)</option>
+<option data-countryCode="RU" value="7">Russia (+7)</option>
+<option data-countryCode="RW" value="250">Rwanda (+250)</option>
+<option data-countryCode="SM" value="378">San Marino (+378)</option>
+<option data-countryCode="ST" value="239">Sao Tome &amp; Principe (+239)</option>
+<option data-countryCode="SA" value="966">Saudi Arabia (+966)</option>
+<option data-countryCode="SN" value="221">Senegal (+221)</option>
+<option data-countryCode="CS" value="381">Serbia (+381)</option>
+<option data-countryCode="SC" value="248">Seychelles (+248)</option>
+<option data-countryCode="SL" value="232">Sierra Leone (+232)</option>
+<option data-countryCode="SG" value="65">Singapore (+65)</option>
+<option data-countryCode="SK" value="421">Slovak Republic (+421)</option>
+<option data-countryCode="SI" value="386">Slovenia (+386)</option>
+<option data-countryCode="SB" value="677">Solomon Islands (+677)</option>
+<option data-countryCode="SO" value="252">Somalia (+252)</option>
+<option data-countryCode="ZA" value="27">South Africa (+27)</option>
+<option data-countryCode="ES" value="34">Spain (+34)</option>
+<option data-countryCode="LK" value="94">Sri Lanka (+94)</option>
+<option data-countryCode="SH" value="290">St. Helena (+290)</option>
+<option data-countryCode="KN" value="1869">St. Kitts (+1869)</option>
+<option data-countryCode="SC" value="1758">St. Lucia (+1758)</option>
+<option data-countryCode="SD" value="249">Sudan (+249)</option>
+<option data-countryCode="SR" value="597">Suriname (+597)</option>
+<option data-countryCode="SZ" value="268">Swaziland (+268)</option>
+<option data-countryCode="SE" value="46">Sweden (+46)</option>
+<option data-countryCode="CH" value="41">Switzerland (+41)</option>
+<option data-countryCode="SI" value="963">Syria (+963)</option>
+<option data-countryCode="TW" value="886">Taiwan (+886)</option>
+<option data-countryCode="TJ" value="7">Tajikstan (+7)</option>
+<option data-countryCode="TH" value="66">Thailand (+66)</option>
+<option data-countryCode="TG" value="228">Togo (+228)</option>
+<option data-countryCode="TO" value="676">Tonga (+676)</option>
+<option data-countryCode="TT" value="1868">Trinidad &amp; Tobago (+1868)</option>
+<option data-countryCode="TN" value="216">Tunisia (+216)</option>
+<option data-countryCode="TR" value="90">Turkey (+90)</option>
+<option data-countryCode="TM" value="7">Turkmenistan (+7)</option>
+<option data-countryCode="TM" value="993">Turkmenistan (+993)</option>
+<option data-countryCode="TC" value="1649">Turks &amp; Caicos Islands (+1649)</option>
+<option data-countryCode="TV" value="688">Tuvalu (+688)</option>
+<option data-countryCode="UG" value="256">Uganda (+256)</option>
+<option data-countryCode="GB" value="44">UK (+44)</option>
+<option data-countryCode="UA" value="380">Ukraine (+380)</option>
+<option data-countryCode="AE" value="971">United Arab Emirates (+971)</option>
+<option data-countryCode="UY" value="598">Uruguay (+598)</option>
+<option data-countryCode="US" value="1">USA (+1)</option>
+<option data-countryCode="UZ" value="7">Uzbekistan (+7)</option>
+<option data-countryCode="VU" value="678">Vanuatu (+678)</option>
+<option data-countryCode="VA" value="379">Vatican City (+379)</option>
+<option data-countryCode="VE" value="58">Venezuela (+58)</option>
+<option data-countryCode="VN" value="84">Vietnam (+84)</option>
+<option data-countryCode="VG" value="84">Virgin Islands - British (+1284)</option>
+<option data-countryCode="VI" value="84">Virgin Islands - US (+1340)</option>
+<option data-countryCode="WF" value="681">Wallis &amp; Futuna (+681)</option>
+<option data-countryCode="YE" value="969">Yemen (North)(+969)</option>
+<option data-countryCode="YE" value="967">Yemen (South)(+967)</option>
+<option data-countryCode="ZM" value="260">Zambia (+260)</option>
+<option data-countryCode="ZW" value="263">Zimbabwe (+263)</option>
+    </select>
+    <input type="text" name="ea-phone-number-part" maxlength="499" class="ea-phone-number-part custom-field dummy form-control" placeholder="<%- item.mixed %>" <% if (item.required == "1") { %>data-rule-required="true" data-msg-required="<%- settings['trans.field-required'] %>"<% } %>><br>
+    <input type="hidden" name="<%- item.slug %>" data-prop="<%- item.slug %>" class="custom-field full-value" >
+</div>
+                            <!-- EMAIL TYPE -->
+                            <% } else if(item.type === 'EMAIL') { %>
+                            <input id="<%- item.slug %>" class="form-control custom-field" maxlength="499" type="text" name="<%- item.slug %>" placeholder="<%- item.mixed %>" value="<%- item.default_value %>" <% if (item.required == "1") { %>data-rule-required="true" data-msg-required="<%- settings['trans.field-required'] %>"<% } %> data-rule-email="true" data-msg-email="<%- settings['trans.error-email'] %>">
+                            <!-- SELECT TYPE -->
+                            <% } else if(item.type === 'SELECT') { %>
+                            <select id="<%- item.slug %>" class="form-control custom-field" name="<%- item.slug %>" <% if (item.required == "1") { %>aria-required="true" <% if (item.required == "1") { %>data-rule-required="true"<% } %> data-msg-required="<%- settings['trans.field-required'] %>"<% } %>>
+                            <% _.each(item.mixed.split(','),function(i,k,l) { %>
+                            <% if (i == "-") { %>
+                            <option value="">-</option>
+                            <% } else { %>
+                            <option value="<%- i %>"><%- i %></option>
+                            <% }});%>
+                            </select>
+                            <!-- TEXTAREA TYPE -->
+                            <% } else if(item.type === 'TEXTAREA') { %>
+                            <textarea id="<%- item.slug %>" class="form-control custom-field" rows="3" maxlength="499" style="height: auto;" placeholder="<%- item.mixed %>" name="<%- item.slug %>" <% if (item.required == "1") { %>data-rule-required="true" data-msg-required="<%- settings['trans.field-required'] %>"<% } %>></textarea>
+                            <% } %>
+                        </div>
+                    </div>
+                    <% });%>
+                    </div>
+                    <div class="form-group" style="display:none;">
+                        <div class="block"></div>
+                        <label class="ea-label col-sm-4 control-label">
+                            Repeat Appointement                        </label>
+                        <div class="col-sm-8">
+                            <select id="repeat_booking" data-c="repeat_booking" class="filter form-control">
+                                <option value="0">Does Not Repeat</option>
+                                <option value="1">Repeat Weekly</option>
+                                <option value="2">Custom</option>
+                            </select>
+                        </div>
+                        <input type="hidden" name="repeat_booking" value="0" />
+                        <input type="hidden" name="repeat_start_date" value="0" />
+                        <input type="hidden" name="repeat_end_date" value="0" />
+                        <div id="recurrence-summary" class="mt-3 text-muted" style="display: none; padding:20px;">
+                            <strong>Repeat every:</strong> <span id="summary-repeat-week"></span><br>
+                            <strong>Starts:</strong> <span id="summary-start-date"></span><br>
+                            <strong>Ends:</strong> <span id="summary-end-date"></span>
+                        </div>
+                    </div>
+                    
+                    <h3 id="booking-overview-header"><%- settings['trans.booking-overview'] %></h3>
+                    <div id="booking-overview"></div>
+                    <div class="ea_hide_show">
+                    <% if (settings['show.iagree'] == '1') { %>
+
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label">&nbsp;</label>
+                        <div class="col-sm-8">
+                            <div class="checkbox">
+                                <label>
+                                    <input id="ea-iagree" name="iagree" type="checkbox" data-rule-required="true"
+                                           data-msg-required="<%- settings['trans.field-iagree'] %>">
+                                    <%- settings['trans.iagree'] %>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <% } %>
+                    <% if (settings['gdpr.on'] == '1') { %>
+
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label">&nbsp;</label>
+                        <div class="col-sm-8">
+                            <div class="checkbox">
+                                <label class="gdpr">
+                                    <input id="ea-gdpr" name="gdpr" type="checkbox" data-rule-required="true"
+                                           data-msg-required="<%- settings['gdpr.message'] %>">
+                                    <% if (settings['gdpr.link'] != '') { %>
+                                        <a href="<%- settings['gdpr.link'] %>" target="_blank"><%- settings['gdpr.label'] %></a>
+                                    <% } else {%>
+                                        <%- settings['gdpr.label'] %>
+                                    <% } %>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <% } %>
+
+                    <% if (settings['captcha.site-key'] !== '') { %>
+                        <div style="width: 100%; padding: 20px;" class="g-recaptcha" data-sitekey="<%- settings['captcha.site-key'] %>"></div>
+                    <% } %>
+
+                                                            
+                    <div class="form-group">
+                        <div class="col-sm-12 ea-actions-group">
+                            <button class="ea-btn ea-submit btn btn-primary booking-button"><%- settings['trans.submit_button_text'] %></button>                            <button class="ea-btn ea-cancel btn btn-default"><%- settings['trans.cancel'] %></button>
+                        </div>
+                    </div>
+                </div>
+                <% if (settings.layout_cols === '2') { %>
+            </div>
+            <% } %>
+                </div>
+        </form>
+    </div>
+<div id="ea-loader"></div>
+
+<div id="custom-recurrence-modal" style="display:none; position:fixed; top:20%; left:50%; transform:translateX(-50%); background:#fff; padding:20px; border:1px solid #ccc; border-radius:8px; z-index:10000; width:420px;">
+  <h4>Custom recurrence</h4>
+    <div class="row">
+        <label class="col-sm-4">Repeat every</label>
+        <input type="number" min="1" id="modal-repeat-week" value="2" class="col-sm-4"> weeks    </div>
+
+    <div class="mt-3 row" style="margin-top: 10px;">
+        <label class="col-sm-4">Starts</label>
+        <input class="col-sm-4" type="date" id="modal-start-date" />
+    </div>
+
+    <div class="mt-3">
+        <label>Ends</label><br>
+        <input type="radio" name="modal-end-type" value="never" id="modal-end-never" checked> 
+        <label for="modal-end-never">Never</label><br>
+        <input type="radio" name="modal-end-type" value="date" id="modal-end-on"> 
+        <label for="modal-end-on">On</label>
+        <input type="date" id="modal-end-date" disabled>
+    </div>
+
+  <div class="mt-3" style="margin-top: 10px;">
+    <button type="button" id="modal-save-btn" class="btn btn-primary">Done</button>
+    <button type="button" id="modal-cancel-btn" class="btn btn-default">Cancel</button>
+  </div>
+</div>
+
+<!-- Optional: Light overlay -->
+<div id="custom-recurrence-overlay" style="display:none; position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.4);z-index:9999;"></div>
+
+
+
+
+
+</script>
+<style>
+    body .wp-block-post-content a:not(.wp-element-button) {
+        color: #000000;
+        text-decoration: none !important;
+    }
+    .ea-standard .selected-time {
+        background-color: green !important;
+        color: white !important;
+    }
+
+</style>
+<script type="text/template" id="ea-appointments-overview">
+    <small id="ea-overview-message"><%- settings['trans.overview-message'] %></small>
+    <table>
+        <tbody>
+        <% if(settings['rtl'] == '1') { %>
+            <% if(data.location.indexOf('_') !== 0) { %>
+            <tr class="row-location">
+                <td class="ea-label"><%- settings['trans.location'] %></td>
+                <td class="value"><%- data.location %></td>
+            </tr>
+            <% } %>
+            <% if(data.service.indexOf('_') !== 0) { %>
+            <tr class="row-service">
+                <td class="ea-label"><%- settings['trans.service'] %></td>
+                <td class="value"><%- data.service %></td>
+            </tr>
+            <% if(data.service_description && data.service_description.length > 0) { %>
+            <tr class="row-service-description">
+                <td class="ea-label">Description</td>
+                <td class="value" style="white-space: pre-line;"><%= data.service_description %></td>
+            </tr>
+            <% } %>
+            <% } %>
+            <% if(data.worker.indexOf('_') !== 0) { %>
+            <tr class="row-worker">
+                <td class="ea-label"><%- settings['trans.worker'] %></td>
+                <td class="value"><%- data.worker %></td>
+            </tr>
+            <% } %>
+            <% if (settings['price.hide'] !== '1') { %>
+            <tr class="row-price">
+                <td class="ea-label"><%- settings['trans.price'] %></td>
+                <td class="value"><%- settings['hide.decimal_in_price'] == '1' ? Math.round(parseFloat(data.price)) : data.price %> <%- settings['trans.currency'] %></td>
+            </tr>
+            <% } %>
+            <tr class="row-datetime">
+                <td class="ea-label"><%- settings['trans.date-time'] %></td>
+                <td class="value"><%- data.date %> <%- data.time %></td>
+            </tr>
+        <% } else { %>
+            <% if(data.location.indexOf('_') !== 0) { %>
+            <tr class="row-location">
+                <td class="ea-label"><%- settings['trans.location'] %></td>
+                <td class="value"><%- data.location %></td>
+            </tr>
+            <% } %>
+            <% if(data.service.indexOf('_') !== 0) { %>
+            <tr class="row-service">
+                <td class="ea-label"><%- settings['trans.service'] %></td>
+                <td class="value"><%- data.service %></td>
+            </tr>
+            <% if(data.service_description && data.service_description.length > 0) { %>
+            <tr class="row-service-description">
+                <td class="ea-label">Description</td>
+                <td class="value" style="white-space: pre-line;"><%= data.service_description %></td>
+            </tr>
+            <% } %>
+            <% } %>
+            <% if(data.worker.indexOf('_') !== 0) { %>
+            <tr class="row-worker">
+                <td class="ea-label"><%- settings['trans.worker'] %></td>
+                <td class="value"><%- data.worker %></td>
+            </tr>
+            <% } %>
+            <% if (settings['price.hide'] !== '1') { %>
+            <tr class="row-price">
+                <td class="ea-label"><%- settings['trans.price'] %></td>
+                <% if (settings['currency.before'] == '1') { %>
+                <td class="value"><%- settings['trans.currency'] %><%- settings['hide.decimal_in_price'] == '1' ? Math.round(parseFloat(data.price)) : data.price %></td>
+                <% } else { %>
+                <td class="value"><%- settings['hide.decimal_in_price'] == '1' ? Math.round(parseFloat(data.price)) : data.price %><%- settings['trans.currency'] %></td>
+                <% } %>
+            </tr>
+            <% } %>
+            <tr class="row-datetime">
+                <td class="ea-label"><%- settings['trans.date-time'] %></td>
+                <td class="value"><%- data.date_time %></td>
+            </tr>
+        <% } %>
+        </tbody>
+    </table>
+    <div id="ea-total-amount" style="display: none;" data-total="<%- data.price %>"></div>
+    <div id="ea-meta-data" 
+             data-location="<%- data.location %>" 
+             data-service="<%- data.service %>" 
+             data-worker="<%- data.worker %>" 
+             data-date-time="<%- data.date_time %>" 
+             data-currency="<%- settings['trans.currency'] %>"></div>
+    
+    <div id="ea-success-box" style="display:none; min-width:400px; min-height:340px; margin: 20px auto; padding: 20px; border-radius: 10px; text-align: center; font-family: Arial, sans-serif; box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);" class="ea-confirmation-card">
+        <h3 style="color: #2b6924; margin-top: 0;" class="ea-confirmation-title">
+            <%- settings['trans.confirmation-title'] || "Thank You for Booking!" %>
+        </h3>
+        <div style="margin: 10px 0 20px;">
+            <p style="font-size: 14px; color: #555; margin-top: 8px; word-wrap: break-word; white-space: normal; max-width: 100%;" class="ea-status-note">
+            </p>
+        </div>
+
+        <div id="ea-overview-details" style="width: 100%; font-size: 14px; color: #000; text-align: left; margin: 0 auto 20px;">
+        </div>
+
+        <div id="ea-overview-buttons" style="justify-content: center; gap: 10px; margin-top: 15px; flex-wrap: wrap;">
+            <a 
+                href="#" 
+                onclick="window.location.reload();" 
+                style="padding: 5px 10px; background-color: #333cb7; color: white; text-decoration: none; border-radius: 5px; margin-right: 5px;" 
+                class="ea-button-book-again">
+                <%- settings['trans.book-again'] || "Book New Appointment" %>                
+            </a>
+            <a 
+                id="ea-add-to-calendar" 
+                href="#" 
+                target="_blank" 
+                style="background-color: #34A853; color: #fff; padding: 5px 10px; border-radius: 6px; text-decoration: none;">                
+                Add to Google Calendar            </a>
+        </div>
+    </div>
+</script>
+        <div class="ea-bootstrap bootstrap"></div>
+
+		</div>
+	</div>
+</div></div></div></div>
+	</div><!-- .entry-content -->
+</article><!-- #post-8282 -->    			</div>
+    		    	</main><!-- #main -->
+    </div><!-- #primary -->
+
+
+        	</div>
+        	<!-- #content -->
+        </div>
+        <!-- #page -->
+        
+        <!-- wraper_footer -->
+<footer class="wraper_footer style-eleven">
+		<!-- wraper_footer_main -->
+	<div class="wraper_footer_main">
+		<div class="container">
+			<!-- row -->
+			<div class="row footer_main">
+				<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12"><div class="footer_main_item matchHeight"><section id="media_image-1" class="widget widget_media_image"><a href="https://www.berecsarl.com/"><img width="85" height="69" src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2085%2069'%3E%3C/svg%3E" class="image wp-image-8461  attachment-full size-full" alt="" style="max-width: 100%; height: auto;" decoding="async" data-lazy-src="https://www.berecsarl.com/wp-content/uploads/2020/03/MENU-LOGO-2.jpg" /><noscript><img width="85" height="69" src="https://www.berecsarl.com/wp-content/uploads/2020/03/MENU-LOGO-2.jpg" class="image wp-image-8461  attachment-full size-full" alt="" style="max-width: 100%; height: auto;" decoding="async" /></noscript></a></section><section id="text-2" class="widget widget_text">			<div class="textwidget"><p>La Société BEREC sise au C/343 Ayélawadjè ; 05 BP 487 AKPAKPA  Cotonou, à son siège principal en République du Bénin en Afrique de l’Ouest, où elle est implantée depuis 20 ans.</p>
+</div>
+		</section></div>
+					 </div><div class="col-lg-3 col-md-3 col-sm-6 col-xs-12"><div class="footer_main_item matchHeight"><section id="nav_menu-11" class="widget widget_nav_menu"><h5 class="widget-title">Catégories</h5><div class="menu-footer-departments-container"><ul id="menu-footer-departments" class="menu"><li id="menu-item-8674" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-8674"><a href="https://www.berecsarl.com/categorie-produit/dispensaire/">Dispensaire</a></li>
+<li id="menu-item-8675" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-8675"><a href="https://www.berecsarl.com/categorie-produit/maternite/">Maternité</a></li>
+<li id="menu-item-8676" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-8676"><a href="https://www.berecsarl.com/categorie-produit/bloc-operatoire/">Bloc Opératoire</a></li>
+<li id="menu-item-8677" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-8677"><a href="https://www.berecsarl.com/categorie-produit/cardiologie/">Cardiologie</a></li>
+<li id="menu-item-8678" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-8678"><a href="https://www.berecsarl.com/categorie-produit/pediatrie/">Pédiatrie</a></li>
+<li id="menu-item-8679" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-8679"><a href="https://www.berecsarl.com/categorie-produit/mobilier-medical/">Mobilier médical</a></li>
+</ul></div></section></div>
+					 </div><div class="col-lg-3 col-md-3 col-sm-6 col-xs-12"><div class="footer_main_item matchHeight">
+		<section id="recent-posts-5" class="widget widget_recent_entries">
+		<h5 class="widget-title">Articles récents</h5>
+		<ul>
+											<li>
+					<a href="https://www.berecsarl.com/2022/01/28/acquisition-et-installation-dune-unite-de-fauteuil-dentaire-au-profit-de-chuz-de-suru-lere/">Acquisition et installation d&#8217;une unité de fauteuil dentaire au profit de CHUZ de Suru-Léré le 14/01/2022</a>
+									</li>
+											<li>
+					<a href="https://www.berecsarl.com/2021/12/06/hz-allada-remise-en-etat-de-lautoclave-s-500/">HZ-Allada : Remise en état de l&#8217;autoclave S-500</a>
+									</li>
+											<li>
+					<a href="https://www.berecsarl.com/2021/12/06/maintenance-et-remise-en-service-de-la-radio-marque-bmi-du-chuz-suru-lere-le-26-novembre-2021/">Maintenance et remise en service de la radio marque BMI du CHUZ Suru-Léré le 26 Novembre 2021</a>
+									</li>
+											<li>
+					<a href="https://www.berecsarl.com/2021/09/24/stimulateur-cardiaque/">Stimulateur cardiaque</a>
+									</li>
+					</ul>
+
+		</section></div>
+					 </div><div class="col-lg-3 col-md-3 col-sm-6 col-xs-12"><div class="footer_main_item matchHeight"><section id="text-3" class="widget widget_text"><h5 class="widget-title">Bureaux</h5>			<div class="textwidget"><p>C/343 – quartier Ayélawadjè – Akpakpa<br />
+Cotonou &#8211; Bénin</p>
+<p>Email: contact@berecsarl.com</p>
+<p>Lun &#8211; Vend : 8h00 &#8211; 18h00<br />
+Sam : sur RDV</p>
+</div>
+		</section></div>
+					 </div>			</div>
+			<!-- row -->
+		</div>
+	</div>
+	<!-- wraper_footer_main -->
+		<!-- wraper_footer_copyright -->
+	<div class="wraper_footer_copyright">
+		<div class="container">
+			<!-- row -->
+			<div class="row footer_copyright">
+				<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+					<!-- footer_copyright_item -->
+					<div class="footer_copyright_item text-left">
+						<p>Tous Droits Réservés BEREC 2022</p>
+					</div>
+					<!-- footer_copyright_item -->
+				</div>
+				<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+					<!-- footer_copyright_item -->
+					<div class="footer_copyright_item text-right">
+						<div class="menu-concu-par-ac2i-container"><ul id="menu-concu-par-ac2i" class="menu"><li id="menu-item-8496" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-8496"><a href="https://www.ac2ibenin.com">Conçu par AC2I</a></li>
+</ul></div>					</div>
+					<!-- footer_copyright_item -->
+				</div>
+			</div>
+			<!-- row -->
+		</div>
+	</div>
+	<!-- wraper_footer_copyright -->
+</footer>
+<!-- wraper_footer -->
+
+    </div>
+    <!-- radiantthemes-website-layout -->
+
+<script type="speculationrules">
+{"prefetch":[{"source":"document","where":{"and":[{"href_matches":"/*"},{"not":{"href_matches":["/wp-*.php","/wp-admin/*","/wp-content/uploads/*","/wp-content/*","/wp-content/plugins/*","/wp-content/themes/apexclinic/*","/*\\?(.+)"]}},{"not":{"selector_matches":"a[rel~=\"nofollow\"]"}},{"not":{"selector_matches":".no-prefetch, .no-prefetch a"}}]},"eagerness":"conservative"}]}
+</script>
+	<script type="rocketlazyloadscript" data-rocket-type='text/javascript'>
+		(function () {
+			var c = document.body.className;
+			c = c.replace(/woocommerce-no-js/, 'woocommerce-js');
+			document.body.className = c;
+		})();
+	</script>
+				<script type="rocketlazyloadscript" data-category="functional">
+											</script>
+			<script type="rocketlazyloadscript" id="wp-hooks-js" src="https://www.berecsarl.com/wp-includes/js/dist/hooks.min.js?ver=7496969728ca0f95732d"></script>
+<script type="rocketlazyloadscript" id="wp-i18n-js" src="https://www.berecsarl.com/wp-includes/js/dist/i18n.min.js?ver=781d11515ad3d91786ec"></script>
+<script type="rocketlazyloadscript" id="wp-i18n-js-after">
+wp.i18n.setLocaleData( { 'text direction\u0004ltr': [ 'ltr' ] } );
+//# sourceURL=wp-i18n-js-after
+</script>
+<script type="rocketlazyloadscript" data-minify="1" id="swv-js" src="https://www.berecsarl.com/wp-content/cache/min/1/wp-content/plugins/contact-form-7/includes/swv/js/index.js?ver=1780675020" defer></script>
+<script type="rocketlazyloadscript" id="contact-form-7-js-translations">
+( function( domain, translations ) {
+	var localeData = translations.locale_data[ domain ] || translations.locale_data.messages;
+	localeData[""].domain = domain;
+	wp.i18n.setLocaleData( localeData, domain );
+} )( "contact-form-7", {"translation-revision-date":"2026-07-27 15:37:27+0000","generator":"GlotPress\/4.0.3","domain":"messages","locale_data":{"messages":{"":{"domain":"messages","plural-forms":"nplurals=2; plural=n > 1;","lang":"fr"},"This contact form is placed in the wrong place.":["Ce formulaire de contact est plac\u00e9 dans un mauvais endroit."],"Error:":["Erreur\u00a0:"]}},"comment":{"reference":"includes\/js\/index.js"}} );
+//# sourceURL=contact-form-7-js-translations
+</script>
+<script type="rocketlazyloadscript" id="contact-form-7-js-before">
+var wpcf7 = {
+    "api": {
+        "root": "https:\/\/www.berecsarl.com\/wp-json\/",
+        "namespace": "contact-form-7\/v1"
+    },
+    "cached": 1
+};
+//# sourceURL=contact-form-7-js-before
+</script>
+<script type="rocketlazyloadscript" data-minify="1" id="contact-form-7-js" src="https://www.berecsarl.com/wp-content/cache/min/1/wp-content/plugins/contact-form-7/includes/js/index.js?ver=1780675020" defer></script>
+<script type="rocketlazyloadscript" id="rocket-browser-checker-js-after">
+"use strict";var _createClass=function(){function defineProperties(target,props){for(var i=0;i<props.length;i++){var descriptor=props[i];descriptor.enumerable=descriptor.enumerable||!1,descriptor.configurable=!0,"value"in descriptor&&(descriptor.writable=!0),Object.defineProperty(target,descriptor.key,descriptor)}}return function(Constructor,protoProps,staticProps){return protoProps&&defineProperties(Constructor.prototype,protoProps),staticProps&&defineProperties(Constructor,staticProps),Constructor}}();function _classCallCheck(instance,Constructor){if(!(instance instanceof Constructor))throw new TypeError("Cannot call a class as a function")}var RocketBrowserCompatibilityChecker=function(){function RocketBrowserCompatibilityChecker(options){_classCallCheck(this,RocketBrowserCompatibilityChecker),this.passiveSupported=!1,this._checkPassiveOption(this),this.options=!!this.passiveSupported&&options}return _createClass(RocketBrowserCompatibilityChecker,[{key:"_checkPassiveOption",value:function(self){try{var options={get passive(){return!(self.passiveSupported=!0)}};window.addEventListener("test",null,options),window.removeEventListener("test",null,options)}catch(err){self.passiveSupported=!1}}},{key:"initRequestIdleCallback",value:function(){!1 in window&&(window.requestIdleCallback=function(cb){var start=Date.now();return setTimeout(function(){cb({didTimeout:!1,timeRemaining:function(){return Math.max(0,50-(Date.now()-start))}})},1)}),!1 in window&&(window.cancelIdleCallback=function(id){return clearTimeout(id)})}},{key:"isDataSaverModeOn",value:function(){return"connection"in navigator&&!0===navigator.connection.saveData}},{key:"supportsLinkPrefetch",value:function(){var elem=document.createElement("link");return elem.relList&&elem.relList.supports&&elem.relList.supports("prefetch")&&window.IntersectionObserver&&"isIntersecting"in IntersectionObserverEntry.prototype}},{key:"isSlowConnection",value:function(){return"connection"in navigator&&"effectiveType"in navigator.connection&&("2g"===navigator.connection.effectiveType||"slow-2g"===navigator.connection.effectiveType)}}]),RocketBrowserCompatibilityChecker}();
+//# sourceURL=rocket-browser-checker-js-after
+</script>
+<script id="rocket-preload-links-js-extra">
+var RocketPreloadLinksConfig = {"excludeUris":"/(.+/)?feed/?.+/?|/(?:.+/)?embed/|/checkout/|/cart/|/my-account/|/(index\\.php/)?wp\\-json(/.*|$)|/wp-admin/|/logout/|/wp-login.php","usesTrailingSlash":"1","imageExt":"jpg|jpeg|gif|png|tiff|bmp|webp|avif","fileExt":"jpg|jpeg|gif|png|tiff|bmp|webp|avif|php|pdf|html|htm","siteUrl":"https://www.berecsarl.com","onHoverDelay":"100","rateThrottle":"3"};
+//# sourceURL=rocket-preload-links-js-extra
+</script>
+<script type="rocketlazyloadscript" id="rocket-preload-links-js-after">
+(function() {
+"use strict";var r="function"==typeof Symbol&&"symbol"==typeof Symbol.iterator?function(e){return typeof e}:function(e){return e&&"function"==typeof Symbol&&e.constructor===Symbol&&e!==Symbol.prototype?"symbol":typeof e},e=function(){function i(e,t){for(var n=0;n<t.length;n++){var i=t[n];i.enumerable=i.enumerable||!1,i.configurable=!0,"value"in i&&(i.writable=!0),Object.defineProperty(e,i.key,i)}}return function(e,t,n){return t&&i(e.prototype,t),n&&i(e,n),e}}();function i(e,t){if(!(e instanceof t))throw new TypeError("Cannot call a class as a function")}var t=function(){function n(e,t){i(this,n),this.browser=e,this.config=t,this.options=this.browser.options,this.prefetched=new Set,this.eventTime=null,this.threshold=1111,this.numOnHover=0}return e(n,[{key:"init",value:function(){!this.browser.supportsLinkPrefetch()||this.browser.isDataSaverModeOn()||this.browser.isSlowConnection()||(this.regex={excludeUris:RegExp(this.config.excludeUris,"i"),images:RegExp(".("+this.config.imageExt+")$","i"),fileExt:RegExp(".("+this.config.fileExt+")$","i")},this._initListeners(this))}},{key:"_initListeners",value:function(e){-1<this.config.onHoverDelay&&document.addEventListener("mouseover",e.listener.bind(e),e.listenerOptions),document.addEventListener("mousedown",e.listener.bind(e),e.listenerOptions),document.addEventListener("touchstart",e.listener.bind(e),e.listenerOptions)}},{key:"listener",value:function(e){var t=e.target.closest("a"),n=this._prepareUrl(t);if(null!==n)switch(e.type){case"mousedown":case"touchstart":this._addPrefetchLink(n);break;case"mouseover":this._earlyPrefetch(t,n,"mouseout")}}},{key:"_earlyPrefetch",value:function(t,e,n){var i=this,r=setTimeout(function(){if(r=null,0===i.numOnHover)setTimeout(function(){return i.numOnHover=0},1e3);else if(i.numOnHover>i.config.rateThrottle)return;i.numOnHover++,i._addPrefetchLink(e)},this.config.onHoverDelay);t.addEventListener(n,function e(){t.removeEventListener(n,e,{passive:!0}),null!==r&&(clearTimeout(r),r=null)},{passive:!0})}},{key:"_addPrefetchLink",value:function(i){return this.prefetched.add(i.href),new Promise(function(e,t){var n=document.createElement("link");n.rel="prefetch",n.href=i.href,n.onload=e,n.onerror=t,document.head.appendChild(n)}).catch(function(){})}},{key:"_prepareUrl",value:function(e){if(null===e||"object"!==(void 0===e?"undefined":r(e))||!1 in e||-1===["http:","https:"].indexOf(e.protocol))return null;var t=e.href.substring(0,this.config.siteUrl.length),n=this._getPathname(e.href,t),i={original:e.href,protocol:e.protocol,origin:t,pathname:n,href:t+n};return this._isLinkOk(i)?i:null}},{key:"_getPathname",value:function(e,t){var n=t?e.substring(this.config.siteUrl.length):e;return n.startsWith("/")||(n="/"+n),this._shouldAddTrailingSlash(n)?n+"/":n}},{key:"_shouldAddTrailingSlash",value:function(e){return this.config.usesTrailingSlash&&!e.endsWith("/")&&!this.regex.fileExt.test(e)}},{key:"_isLinkOk",value:function(e){return null!==e&&"object"===(void 0===e?"undefined":r(e))&&(!this.prefetched.has(e.href)&&e.origin===this.config.siteUrl&&-1===e.href.indexOf("?")&&-1===e.href.indexOf("#")&&!this.regex.excludeUris.test(e.href)&&!this.regex.images.test(e.href))}}],[{key:"run",value:function(){"undefined"!=typeof RocketPreloadLinksConfig&&new n(new RocketBrowserCompatibilityChecker({capture:!0,passive:!0}),RocketPreloadLinksConfig).init()}}]),n}();t.run();
+}());
+
+//# sourceURL=rocket-preload-links-js-after
+</script>
+<script type="rocketlazyloadscript" id="bootstrap-js" src="https://www.berecsarl.com/wp-content/themes/apexclinic/js/bootstrap.min.js?ver=1786473081" defer></script>
+<script type="rocketlazyloadscript" id="sidr-js" src="https://www.berecsarl.com/wp-content/themes/apexclinic/js/jquery.sidr.min.js?ver=1786473081" defer></script>
+<script type="rocketlazyloadscript" id="matchHeight-js" src="https://www.berecsarl.com/wp-content/themes/apexclinic/js/jquery.matchHeight-min.js?ver=1786473081" defer></script>
+<script type="rocketlazyloadscript" id="wow-js" src="https://www.berecsarl.com/wp-content/themes/apexclinic/js/wow.min.js?ver=1786473081" defer></script>
+<script type="rocketlazyloadscript" id="nicescroll-js" src="https://www.berecsarl.com/wp-content/themes/apexclinic/js/jquery.nicescroll.min.js?ver=1786473081" defer></script>
+<script type="rocketlazyloadscript" id="sticky-js" src="https://www.berecsarl.com/wp-content/themes/apexclinic/js/jquery.sticky.min.js?ver=1786473081" defer></script>
+<script type="rocketlazyloadscript" id="retina-js" src="https://www.berecsarl.com/wp-content/themes/apexclinic/js/retina.min.js?ver=1786473081" defer></script>
+<script type="rocketlazyloadscript" data-minify="1" id="radiantthemes-custom-js" src="https://www.berecsarl.com/wp-content/cache/min/1/wp-content/themes/apexclinic/js/radiantthemes-custom.js?ver=1780675020" defer></script>
+<script type="rocketlazyloadscript" id="sourcebuster-js-js" src="https://www.berecsarl.com/wp-content/plugins/woocommerce/assets/js/sourcebuster/sourcebuster.min.js?ver=11.0.1" defer></script>
+<script id="wc-order-attribution-js-extra">
+var wc_order_attribution = {"params":{"lifetime":1.0e-5,"session":30,"base64":false,"ajaxurl":"https://www.berecsarl.com/wp-admin/admin-ajax.php","prefix":"wc_order_attribution_","allowTracking":true},"fields":{"source_type":"current.typ","referrer":"current_add.rf","utm_campaign":"current.cmp","utm_source":"current.src","utm_medium":"current.mdm","utm_content":"current.cnt","utm_id":"current.id","utm_term":"current.trm","utm_source_platform":"current.plt","utm_creative_format":"current.fmt","utm_marketing_tactic":"current.tct","session_entry":"current_add.ep","session_start_time":"current_add.fd","session_pages":"session.pgs","session_count":"udata.vst","user_agent":"udata.uag"}};
+//# sourceURL=wc-order-attribution-js-extra
+</script>
+<script type="rocketlazyloadscript" id="wc-order-attribution-js" src="https://www.berecsarl.com/wp-content/plugins/woocommerce/assets/js/frontend/order-attribution.min.js?ver=11.0.1" defer></script>
+<script type="rocketlazyloadscript" id="wpb_composer_front_js-js" src="https://www.berecsarl.com/wp-content/plugins/js_composer/assets/js/dist/js_composer_front.min.js?ver=6.7.0" defer></script>
+<script type="rocketlazyloadscript" id="underscore-js" src="https://www.berecsarl.com/wp-includes/js/underscore.min.js?ver=1.13.8" defer></script>
+<script type="rocketlazyloadscript" id="ea-validator-js" src="https://www.berecsarl.com/wp-content/plugins/easy-appointments/js/libs/jquery.validate.min.js?ver=4.0" defer></script>
+<script type="rocketlazyloadscript" data-minify="1" id="ea-bootstrap-js" src="https://www.berecsarl.com/wp-content/cache/min/1/wp-content/plugins/easy-appointments/components/bootstrap/js/bootstrap.js?ver=1780699457" defer></script>
+<script type="rocketlazyloadscript" id="jquery-ui-core-js" src="https://www.berecsarl.com/wp-includes/js/jquery/ui/core.min.js?ver=1.13.3" defer></script>
+<script type="rocketlazyloadscript" id="jquery-ui-datepicker-js" src="https://www.berecsarl.com/wp-includes/js/jquery/ui/datepicker.min.js?ver=1.13.3" defer></script>
+<script type="rocketlazyloadscript" id="ea-datepicker-localization-js" src="https://www.berecsarl.com/wp-content/plugins/easy-appointments/js/libs/jquery-ui-i18n.min.js?ver=4.0" defer></script>
+<script type="rocketlazyloadscript" id="moment-js" src="https://www.berecsarl.com/wp-includes/js/dist/vendor/moment.min.js?ver=2.30.1" defer></script>
+<script type="rocketlazyloadscript" id="moment-js-after">
+moment.updateLocale( 'fr_FR', {"months":["janvier","f\u00e9vrier","mars","avril","mai","juin","juillet","ao\u00fbt","septembre","octobre","novembre","d\u00e9cembre"],"monthsShort":["Jan","F\u00e9v","Mar","Avr","Mai","Juin","Juil","Ao\u00fbt","Sep","Oct","Nov","D\u00e9c"],"weekdays":["dimanche","lundi","mardi","mercredi","jeudi","vendredi","samedi"],"weekdaysShort":["dim","lun","mar","mer","jeu","ven","sam"],"week":{"dow":1},"longDateFormat":{"LT":"g:i a","LTS":null,"L":null,"LL":"F j, Y","LLL":"d F Y G\\hi","LLLL":null}} );
+//# sourceURL=moment-js-after
+</script>
+<script type="rocketlazyloadscript" id="ea-masked-js" src="https://www.berecsarl.com/wp-content/plugins/easy-appointments/js/libs/jquery.inputmask.min.js?ver=4.0" defer></script>
+<script type="rocketlazyloadscript" data-minify="1" id="ea-front-bootstrap-js" src="https://www.berecsarl.com/wp-content/cache/min/1/wp-content/plugins/easy-appointments/js/frontend-bootstrap.js?ver=1780699457" defer></script>
+<script type="rocketlazyloadscript" id="ea-front-bootstrap-js-after">window.addEventListener('DOMContentLoaded', function() {
+jQuery(document).on('ea-init:completed', function () { jQuery('.masked-field').inputmask(); });
+//# sourceURL=ea-front-bootstrap-js-after
+});</script>
+<script>window.lazyLoadOptions={elements_selector:"img[data-lazy-src],.rocket-lazyload,iframe[data-lazy-src]",data_src:"lazy-src",data_srcset:"lazy-srcset",data_sizes:"lazy-sizes",class_loading:"lazyloading",class_loaded:"lazyloaded",threshold:300,callback_loaded:function(element){if(element.tagName==="IFRAME"&&element.dataset.rocketLazyload=="fitvidscompatible"){if(element.classList.contains("lazyloaded")){if(typeof window.jQuery!="undefined"){if(jQuery.fn.fitVids){jQuery(element).parent().fitVids()}}}}}};window.addEventListener('LazyLoad::Initialized',function(e){var lazyLoadInstance=e.detail.instance;if(window.MutationObserver){var observer=new MutationObserver(function(mutations){var image_count=0;var iframe_count=0;var rocketlazy_count=0;mutations.forEach(function(mutation){for(i=0;i<mutation.addedNodes.length;i++){if(typeof mutation.addedNodes[i].getElementsByTagName!=='function'){continue}
+if(typeof mutation.addedNodes[i].getElementsByClassName!=='function'){continue}
+images=mutation.addedNodes[i].getElementsByTagName('img');is_image=mutation.addedNodes[i].tagName=="IMG";iframes=mutation.addedNodes[i].getElementsByTagName('iframe');is_iframe=mutation.addedNodes[i].tagName=="IFRAME";rocket_lazy=mutation.addedNodes[i].getElementsByClassName('rocket-lazyload');image_count+=images.length;iframe_count+=iframes.length;rocketlazy_count+=rocket_lazy.length;if(is_image){image_count+=1}
+if(is_iframe){iframe_count+=1}}});if(image_count>0||iframe_count>0||rocketlazy_count>0){lazyLoadInstance.update()}});var b=document.getElementsByTagName("body")[0];var config={childList:!0,subtree:!0};observer.observe(b,config)}},!1)</script><script data-no-minify="1" async src="https://www.berecsarl.com/wp-content/plugins/wp-rocket/assets/js/lazyload/16.1/lazyload.min.js"></script><script>function lazyLoadThumb(e){var t='<img loading="lazy" data-lazy-src="https://i.ytimg.com/vi/ID/hqdefault.jpg" alt="" width="480" height="360"><noscript><img src="https://i.ytimg.com/vi/ID/hqdefault.jpg" alt="" width="480" height="360"></noscript>',a='<div class="play"></div>';return t.replace("ID",e)+a}function lazyLoadYoutubeIframe(){var e=document.createElement("iframe"),t="ID?autoplay=1";t+=0===this.dataset.query.length?'':'&'+this.dataset.query;e.setAttribute("src",t.replace("ID",this.dataset.src)),e.setAttribute("frameborder","0"),e.setAttribute("allowfullscreen","1"),e.setAttribute("allow", "accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"),this.parentNode.replaceChild(e,this)}document.addEventListener("DOMContentLoaded",function(){var e,t,a=document.getElementsByClassName("rll-youtube-player");for(t=0;t<a.length;t++)e=document.createElement("div"),e.setAttribute("data-id",a[t].dataset.id),e.setAttribute("data-query", a[t].dataset.query),e.setAttribute("data-src", a[t].dataset.src),e.innerHTML=lazyLoadThumb(a[t].dataset.id),e.onclick=lazyLoadYoutubeIframe,a[t].appendChild(e)});</script>
+</body>
+</html>
+
+<!-- This website is like a Rocket, isn't it? Performance optimized by WP Rocket. Learn more: https://wp-rocket.me - Debug: cached@1786473081 -->

@@ -1,0 +1,17 @@
+# Vercel local link data
+.vercel
+
+# Local tooling
+.claude/
+
+# Scratch / analysis files (copies of the reference site)
+all_img_urls.txt
+all_urls.txt
+canonical_imgs.txt
+image_list.txt
+sitemap_*.xml
+urls_map.txt
+
+# Screenshots / artifacts de travail
+site-v2/ap_verif/
+site-v2/apercu-accueil.png

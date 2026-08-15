@@ -1,0 +1,159 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Sora:wght@400;500;600;700;800&display=swap');
+@import "tailwindcss";
+
+@theme {
+  /* ---------- BEREC brand palette (précision médicale) ---------- */
+  --color-berec-50:  #eff9fa;
+  --color-berec-100: #d8eef1;
+  --color-berec-200: #b0dde3;
+  --color-berec-300: #7dc5cf;
+  --color-berec-400: #43a5b3;
+  --color-berec-500: #23899a;
+  --color-berec-600: #176e81;
+  --color-berec-700: #155a69;
+  --color-berec-800: #144a56;
+  --color-berec-900: #0d3944;
+  --color-berec-950: #062028;
+
+  /* Teal-navy : sections sombres & textes */
+  --color-navy-500: #2b7f97;
+  --color-navy-600: #1e6a82;
+  --color-navy-700: #17566b;
+  --color-navy-800: #103f50;
+  --color-navy-900: #0a2e3c;
+  --color-navy-950: #051e29;
+
+  /* Or : accent premium (Africa warmth) */
+  --color-gold-300: #f7d488;
+  --color-gold-400: #efb64b;
+  --color-gold-500: #e29e26;
+  --color-gold-600: #c07f14;
+
+  /* ---------- Typographie ---------- */
+  --font-sans: 'Inter', ui-sans-serif, system-ui, sans-serif;
+  --font-heading: 'Sora', ui-sans-serif, system-ui, sans-serif;
+
+  /* ---------- Ombres & effets ---------- */
+  --shadow-card: 0 1px 2px rgba(5, 30, 41, 0.05), 0 10px 30px -12px rgba(5, 30, 41, 0.12);
+  --shadow-card-hover: 0 2px 4px rgba(5, 30, 41, 0.06), 0 18px 40px -16px rgba(5, 30, 41, 0.2);
+  --shadow-glow: 0 0 0 1px rgba(67, 165, 179, 0.25), 0 8px 30px -8px rgba(35, 137, 154, 0.45);
+
+  --radius-xl2: 1.25rem;
+  --radius-2xl3: 2rem;
+
+  --animate-float: float 6s ease-in-out infinite;
+  --animate-pulse-slow: pulse 5s ease-in-out infinite;
+  --animate-spin-slow: spin 12s linear infinite;
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0) }
+    50% { transform: translateY(-18px) }
+  }
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: var(--font-sans);
+  color: var(--color-navy-900);
+  background: #ffffff;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, h4, h5, h6 { font-family: var(--font-heading); }
+
+::selection {
+  background: var(--color-berec-200);
+  color: var(--color-berec-950);
+}
+
+/* ---------- Interaction & accessibilité (ui-ux-pro-max) ---------- */
+/* Tailwind v4 preflight force `cursor: default` sur les boutons */
+button:not(:disabled),
+[role='button']:not([aria-disabled='true']),
+label[for],
+select,
+summary {
+  cursor: pointer;
+}
+button:disabled { cursor: not-allowed; }
+
+/* Anneau de focus visible pour la navigation clavier */
+:focus-visible {
+  outline: 2px solid var(--color-berec-500);
+  outline-offset: 2px;
+  border-radius: 6px;
+}
+
+/* Lien d'évitement (skip link) */
+.skip-link {
+  position: absolute;
+  left: 1rem;
+  top: -4rem;
+  z-index: 100;
+  padding: 0.75rem 1.25rem;
+  border-radius: 9999px;
+  background: var(--color-berec-700);
+  color: #fff;
+  font-weight: 600;
+  font-size: 0.85rem;
+  transition: top 0.2s ease;
+}
+.skip-link:focus-visible { top: 1rem; }
+
+/* Respecter la préférence de mouvement réduit */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* ---------- Utility helpers ---------- */
+.text-gradient {
+  background: linear-gradient(100deg, var(--color-berec-500), var(--color-berec-700));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.bg-grid {
+  background-image:
+    linear-gradient(to right, rgba(21, 90, 105, 0.07) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(21, 90, 105, 0.07) 1px, transparent 1px);
+  background-size: 44px 44px;
+}
+
+.glass {
+  background: rgba(255, 255, 255, 0.78);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+}
+
+/* ---------- Content typography (article bodies) ---------- */
+.prose-berec h2 {
+  font-family: var(--font-heading);
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--color-berec-900);
+  margin: 2rem 0 1rem;
+}
+.prose-berec p { line-height: 1.8; margin: 0 0 1rem; color: var(--color-navy-700); }
+.prose-berec strong { color: var(--color-berec-800); font-weight: 600; }
+.prose-berec ul { list-style: none; margin: 0 0 1.25rem; }
+.prose-berec ul li { position: relative; padding-left: 1.5rem; margin-bottom: .5rem; line-height: 1.7; color: var(--color-navy-700); }
+.prose-berec ul li::before {
+  content: '';
+  position: absolute;
+  left: 0; top: .55em;
+  width: .55rem; height: .55rem;
+  border-radius: 9999px;
+  background: linear-gradient(135deg, var(--color-berec-400), var(--color-berec-600));
+}
+
+/* ---------- Scrollbar ---------- */
+::-webkit-scrollbar { width: 10px; height: 10px; }
+::-webkit-scrollbar-track { background: #f2f7f8; }
+::-webkit-scrollbar-thumb { background: linear-gradient(var(--color-berec-400), var(--color-berec-600)); border-radius: 9999px; }
