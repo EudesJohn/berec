@@ -24,9 +24,10 @@ npm run lint     # oxlint
 
 ## Déploiement
 
-Le projet Vercel `berec-sarl` est connecté à ce dépôt : chaque push sur
-`main` déclenche un déploiement automatique en production
-(<https://berec-sarl-cyan.vercel.app>).
+Le projet Vercel `berec-sarl` est connecté à ce dépôt
+(<https://github.com/EudesJohn/berec>) : chaque push sur `main` déclenche
+un déploiement automatique en production (<https://berec-sarl-cyan.vercel.app>),
+avec `site-v2` comme répertoire racine du build.
 
 Redéploiement manuel possible avec :
 
